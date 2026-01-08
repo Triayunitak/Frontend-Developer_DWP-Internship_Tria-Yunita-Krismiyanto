@@ -1,6 +1,8 @@
 # Frontend-Developer_DWP-Internship_Tria-Yunita-Krismiyanto
 Tria Yunita Krismiyanto Introductory Questions - Frontend Developer 
 
+GITHUB : https://github.com/Triayunitak/Frontend-Developer_DWP-Internship_Tria-Yunita-Krismiyanto
+Dokumentasi penting : src/docs
 
 ## Development Time Log
 
