@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Layout } from 'antd';
+import { Button } from 'antd';
 
 // Assets
 import logoDefault from '../assets/logo bulet default.png';
@@ -18,100 +18,130 @@ const LandingPage = () => {
   const [cardSrc, setCardSrc] = useState(cardNormal);
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleLoginRedirect = () => {
-    navigate('/login');
-  };
-
   return (
     <div style={{ 
       backgroundImage: `url(${bgImage})`, 
       backgroundSize: 'cover', 
-      minHeight: '100vh',
-      color: 'white',
-      position: 'relative'
+      backgroundPosition: 'center',
+      height: '100vh', 
+      width: '100vw',
+      position: 'relative',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#1E1E1E'
     }}>
-      {/* Topbar */}
-      <nav style={{ 
+      
+      {/* HEADER: Memberikan jarak vertikal yang cukup */}
+      <header style={{ 
+        height: '20vh', 
         display: 'flex', 
-        justifyContent: 'space-between', 
-        padding: '20px 50px', 
-        alignItems: 'center' 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        position: 'relative',
+        zIndex: 100
       }}>
-        <div 
-          onMouseEnter={() => setLogo(logoDark)} 
-          onMouseLeave={() => setLogo(logoDefault)}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          background: 'rgba(255, 255, 255, 0.1)',
+          padding: '6px',
+          borderRadius: '50px',
+          backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.15)',
+        }}>
+          <div 
+            onMouseEnter={() => setLogo(logoDark)} 
+            onMouseLeave={() => setLogo(logoDefault)}
+            style={{ padding: '0 25px', display: 'flex', alignItems: 'center' }}
+          >
+            <img src={logo} alt="Logo" style={{ height: '28px', cursor: 'pointer' }} />
+          </div>
+
+          <div className="nav-item" onClick={() => navigate('/Dashboard')}>Internet Plan</div>
+          <div className="nav-item" onClick={() => navigate('/Discount')}>Discount</div>
+          <div className="nav-item" onClick={() => navigate('/Login')}>Buy Now</div>
+        </div>
+
+        <Button 
+          className="btn-login-header"
+          onClick={() => navigate('/login')}
+          style={{ position: 'absolute', right: '60px' }}
         >
-          <img src={logo} alt="Logo" style={{ height: '50px', cursor: 'pointer', transition: '0.3s' }} />
-        </div>
+          Login
+        </Button>
+      </header>
 
-        <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
-          <span className="nav-link" style={{ cursor: 'pointer' }}>Internet Plan</span>
-          <span className="nav-link" style={{ cursor: 'pointer' }}>Discount</span>
-          <Button 
-            className="btn-hover-oren"
-            style={{ borderRadius: '20px', fontWeight: 'bold' }}
-            onClick={handleLoginRedirect}
-          >
-            Buy Now
-          </Button>
-          <Button 
-            ghost 
-            className="btn-hover-oren"
-            style={{ borderRadius: '20px', color: 'white', borderColor: 'white' }}
-            onClick={handleLoginRedirect}
-          >
-            Login
-          </Button>
-        </div>
-      </nav>
-
-      {/* Main Content */}
-      <div style={{ 
+      {/* MAIN CONTENT: Fokus pada kelonggaran jarak (Gap 10vw) */}
+      <main style={{ 
+        flex: 1, 
         display: 'flex', 
-        justifyContent: 'space-around', 
         alignItems: 'center', 
-        padding: '100px 50px' 
+        justifyContent: 'center', 
+        padding: '0 10vw',
+        gap: '10vw' /* Jarak antar elemen diperlebar agar tidak menumpuk */
       }}>
-        {/* Card Section */}
-        <div style={{ position: 'relative', cursor: 'pointer' }}>
+        {/* Card Section: Dikecilkan ukurannya */}
+        <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
           <img 
             src={cardSrc} 
-            alt="Internet Package" 
+            alt="Product Card" 
             style={{ 
-              width: '400px', 
-              transition: 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-              transform: isHovered ? 'rotate(-10deg) scale(1.05)' : 'rotate(0deg)'
+              maxHeight: '40vh', /* Mengecil dari 48vh ke 40vh */
+              width: 'auto',
+              /* Transisi lebih lambat dan halus */
+              transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)', 
+              transform: isHovered ? 'rotate(-8deg) scale(1.1) translateY(-15px)' : 'rotate(0deg)',
+              cursor: 'pointer',
+              filter: isHovered ? 'drop-shadow(0 25px 50px rgba(0,0,0,0.5))' : 'none'
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => {
               setIsHovered(false);
-              setCardSrc(cardNormal); // Reset card saat kursor keluar
+              setCardSrc(cardNormal);
             }}
             onClick={() => setCardSrc(cardBouncy)}
           />
         </div>
 
-        {/* Text Section */}
-        <div>
-          <img src={mainText} alt="Stay Connected, Your Way!" style={{ width: '500px' }} />
+        {/* Text Area: Dikecilkan ukurannya */}
+        <div style={{ flex: 1.2, display: 'flex', justifyContent: 'flex-start' }}>
+          <img 
+            src={mainText} 
+            alt="Stay Connected" 
+            style={{ 
+              maxWidth: '100%', 
+              maxHeight: '45vh', /* Mengecil dari 55vh ke 45vh */
+              objectFit: 'contain' 
+            }} 
+          />
         </div>
-      </div>
+      </main>
 
-      {/* Footer / App Links */}
-      <div style={{ 
-        position: 'absolute', 
-        bottom: '30px', 
-        width: '100%', 
-        textAlign: 'center' 
+      {/* FOOTER */}
+      <footer style={{ 
+        height: '15vh', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        justifyContent: 'center', 
+        alignItems: 'center'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '10px' }}>
-          <img src={googlePlay} alt="Google Play" style={{ height: '40px', cursor: 'pointer' }} />
-          <img src={appStore} alt="App Store" style={{ height: '40px', cursor: 'pointer' }} />
+        <div style={{ display: 'flex', gap: '25px', marginBottom: '15px' }}>
+          <img src={googlePlay} alt="Google Store" style={{ height: '32px', cursor: 'pointer', opacity: 0.9 }} />
+          <img src={appStore} alt="App Store" style={{ height: '32px', cursor: 'pointer', opacity: 0.9 }} />
         </div>
-        <p style={{ fontSize: '12px', opacity: 0.8 }}>
-          Copyright © 2026 – byU PT Telekomunikasi Selular
+        <p style={{ 
+          color: 'var(--putih)', 
+          opacity: 0.4, 
+          fontSize: '0.65rem', 
+          margin: 0, 
+          letterSpacing: '4px',
+          fontWeight: 600
+        }}>
+          COPYRIGHT © 2026 — neXtly PT Next With Me
         </p>
-      </div>
+      </footer>
     </div>
   );
 };

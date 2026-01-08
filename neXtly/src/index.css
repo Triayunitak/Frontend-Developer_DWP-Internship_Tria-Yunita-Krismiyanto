@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Narnoor:wght@400;500;600;700;800&display=swap');
+/* Import Font Narnoor */
+@import url('https://fonts.googleapis.com/css2?family=Narnoor:wght@400;500;600;700;800&display=swap');
 
 :root {
   --oren: #FF7700;
@@ -8,21 +9,89 @@
   --kuning: #FFBF00;
 }
 
-body {
+/* Reset Standar & Anti-Scroll */
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   font-family: 'Narnoor', serif;
   background-color: var(--hitam);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.nav-link:hover {
-  color: var(--oren) !important;
-  transition: 0.3s;
+/* Global Transition untuk kehalusan interaksi */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-.btn-hover-oren:hover {
-  background-color: var(--oren) !important;
-  border-color: var(--oren) !important;
+
+.nav-item {
+  color: var(--putih) !important;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  padding: 0 25px;
+  height: 45px !important;
+  border-radius: 25px;
+  cursor: pointer;
+  
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1 !important;
+  text-align: center;
+  background: transparent;
+  border: none;
+  
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-item:hover {
+  background: var(--oren) !important;
+  color: var(--putih) !important;
+  box-shadow: 0 4px 15px rgba(255, 119, 0, 0.4);
+}
+
+/* Button Login di Header */
+.btn-login-header {
+  background: var(--putih) !important;
+  color: var(--hitam) !important;
+  font-weight: 800;
+  border-radius: 25px;
+  border: none !important;
+  height: 45px !important;
+  padding: 0 30px !important;
+  
+  /* Centering Logic */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  
+  transition: all 0.3s ease;
+}
+
+.btn-login-header:hover {
+  background: var(--oren) !important;
   color: var(--putih) !important;
   transform: translateY(-2px);
-  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(255, 119, 0, 0.3);
+}
+
+.card-animation {
+  transition: all 5s cubic-bezier(0.68, -0.6, 0.32, 1.6) !important;
+  will-change: transform, width;
+}
+
+img, .nav-item {
+  user-select: none;
+  -webkit-user-drag: none;
 }
