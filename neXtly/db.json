@@ -255,6 +255,20 @@
       "phoneNumber": "0853350006827",
       "paymentMethod": "Mandiri",
       "status": "Success"
+    },
+    {
+      "id": "911f",
+      "packageId": "1",
+      "userId": "2527",
+      "discountId": "3bb7",
+      "type": "Best Deal",
+      "month": "January",
+      "amount": 7500,
+      "date": "1/8/2026, 10:15:55 PM",
+      "provider": "XL",
+      "phoneNumber": "087798291839",
+      "paymentMethod": "QRIS",
+      "status": "Success"
     }
   ],
   "discounts": [
@@ -476,6 +490,20 @@
       "id": "4042",
       "message": "Berhasil Klaim: tes (50%). Gunakan Sebelum 2026-01-08",
       "date": "1/8/2026, 10:01:18 PM",
+      "type": "success",
+      "read": true
+    },
+    {
+      "id": "4171",
+      "message": "Pesanan Dibuat: Super Kaget. Menunggu pembayaran...",
+      "date": "1/8/2026, 10:15:55 PM",
+      "type": "warning",
+      "read": true
+    },
+    {
+      "id": "3f76",
+      "message": "Pembayaran Berhasil! Paket Super Kaget untuk 087798291839 sudah aktif.",
+      "date": "1/8/2026, 10:16:25 PM",
       "type": "success",
       "read": true
     }
