@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useAuth } from '../hooks/useAuth';
 import bgImage from '../assets/background.png';
 import logoDark from '../assets/logo dark theme.png';
+import { motion } from 'framer-motion'; // IMPORT MOTION
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -77,22 +78,38 @@ const PackageDetail = () => {
   if (!pkg) return null;
 
   return (
-    <div className="scroll-container">
+    /* GANTI DIV DENGAN MOTION.DIV UNTUK TRANSISI GENTLE */
+    <motion.div 
+      className="scroll-container" 
+      style={{ backgroundColor: '#f9f9f9', minHeight: '100vh', fontFamily: 'Narnoor' }}
       
-      {/* HEADER AREA */}
+      // KONFIGURASI SMART ANIMATE
+      initial={{ opacity: 0, y: 20, scale: 0.98 }} // Mulai sedikit turun dan kecil
+      animate={{ opacity: 1, y: 0, scale: 1 }}     // Masuk ke posisi normal
+      exit={{ opacity: 0, y: -20, scale: 0.98 }}   // Keluar naik sedikit dan mengecil
+      transition={{ 
+        duration: 0.6, 
+        ease: [0.22, 1, 0.36, 1] // Custom Cubic Bezier untuk efek "Gentle" ala iOS
+      }}
+    >
+      
+      {/* HEADER: MEGA TOPBAR */}
       <div style={{ backgroundImage: `url(${bgImage})`, height: '32vh', backgroundSize: 'cover', backgroundPosition: 'center', borderBottomLeftRadius: '50px', borderBottomRightRadius: '50px', position: 'relative', zIndex: 100 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: '35px 6%', alignItems: 'center' }}>
+          
           <Popover content={notifContent} title={<span style={{fontFamily:'Narnoor'}}>Notifikasi</span>} trigger="click" placement="bottomLeft">
             <Badge count={notifications.length}>
               <Button shape="circle" className="btn-icon-nav" icon={<BellOutlined className="icon-nav-custom" />} />
             </Badge>
           </Popover>
+          
           <div style={{ background: 'rgba(255,255,255,0.15)', padding: '10px 15px', borderRadius: '45px', display: 'flex', alignItems: 'center', gap: '15px', backdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.1)' }}>
              <img src={logoDark} style={{ height: '30px', margin: '0 10px', cursor: 'pointer' }} onClick={() => navigate('/dashboard')} />
              <span className="nav-item-dash active" onClick={() => navigate('/dashboard')}>Internet Plan</span>
              <span className="nav-item-dash">Discount</span>
              <span className="nav-item-dash">History</span>
           </div>
+
           <Popover content={profileMenu} trigger="click" placement="bottomRight">
             <div style={{ background: 'rgba(255,255,255,0.9)', padding: '10px 25px', borderRadius: '35px', display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', height: '50px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
               <span style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--hitam)', fontFamily: 'Narnoor' }}>{user ? `Hi! ${user.username}` : 'Guest Account'}</span>
@@ -102,7 +119,10 @@ const PackageDetail = () => {
         </div>
       </div>
 
+      {/* CONTENT AREA */}
       <div style={{ padding: '0 8%', marginTop: '-35px', position: 'relative', zIndex: 110, paddingBottom: '80px' }}>
+        
+        {/* Tombol Back ke Dashboard */}
         <div style={{ marginBottom: '25px' }}>
             <Button className="btn-back-detail" onClick={() => navigate('/dashboard')}>
               <ArrowLeftOutlined className="icon-back" />
@@ -110,6 +130,7 @@ const PackageDetail = () => {
             </Button>
         </div>
 
+        {/* Card Detail Utama */}
         <div style={{ background: 'white', borderRadius: '30px', padding: '40px', display: 'flex', gap: '50px', boxShadow: '0 10px 40px rgba(0,0,0,0.05)', marginBottom: '60px', alignItems: 'center', flexWrap: 'wrap' }}>
           <div className="pkg-card" style={{ width: '320px', padding: '30px', borderRadius: '25px', border: '1px solid #f0f0f0', background: 'white', cursor: 'default' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -127,31 +148,18 @@ const PackageDetail = () => {
           <div style={{ flex: 1, minWidth: '350px' }}>
             <Title level={2} style={{ fontFamily: 'Narnoor', marginBottom: '5px', fontWeight: 800 }}>Detail {pkg.name} for {pkg.type}</Title>
             <Title level={3} style={{ color: 'var(--oren)', marginTop: 0, fontFamily: 'Narnoor', fontWeight: 800 }}>Rp {pkg.price?.toLocaleString()}</Title>
+            <Paragraph style={{ fontSize: '16px', color: '#666', marginTop: '25px', lineHeight: '1.6', fontFamily: 'Narnoor' }}>{pkg.description}</Paragraph>
             
-            <Paragraph style={{ fontSize: '16px', color: '#666', marginTop: '25px', lineHeight: '1.6', fontFamily: 'Narnoor' }}>
-              {pkg.description}
-            </Paragraph>
-
-            {/* FEATURES DINAMIS DARI DB.JSON */}
-            <List 
-              split={false} 
-              dataSource={pkg.features || []} 
-              renderItem={item => (
-                <List.Item style={{padding: '5px 0', border: 'none'}}>
-                  <Text style={{fontFamily: 'Narnoor', fontSize: '15px'}}>
-                    <ArrowRightOutlined style={{ color: 'var(--oren)', marginRight: 10 }} /> {item}
-                  </Text>
-                </List.Item>
-              )} 
+            <List split={false} dataSource={pkg.features || []} 
+              renderItem={item => (<List.Item style={{padding: '5px 0', border: 'none'}}><Text style={{fontFamily: 'Narnoor', fontSize: '15px'}}><ArrowRightOutlined style={{ color: 'var(--oren)', marginRight: 10 }} /> {item}</Text></List.Item>)} 
             />
             
             <Button size="large" block onClick={() => navigate(`/checkout/${pkg.id}`)}
-              style={{ background: 'linear-gradient(to right, #FF7700, #C62129)', color: 'white', borderRadius: '15px', height: '55px', marginTop: '40px', fontWeight: 800, fontSize: '1.2rem', border: 'none', boxShadow: '0 8px 20px rgba(255, 119, 0, 0.3)', fontFamily: 'Narnoor' }}>
-              Buy Now
-            </Button>
+              style={{ background: 'linear-gradient(to right, #FF7700, #C62129)', color: 'white', borderRadius: '15px', height: '55px', marginTop: '40px', fontWeight: 800, fontSize: '1.2rem', border: 'none', boxShadow: '0 8px 20px rgba(255, 119, 0, 0.3)', fontFamily: 'Narnoor' }}>Buy Now</Button>
           </div>
         </div>
 
+        {/* SECTION: SIMILAR PACKAGES */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px' }}>
           <Title level={3} style={{ fontFamily: 'Narnoor', margin: 0, fontWeight: 800 }}>Similar Packages</Title>
           <div style={{ display: 'flex', gap: '12px' }}>
@@ -161,26 +169,18 @@ const PackageDetail = () => {
         </div>
 
         <div ref={scrollRef} style={{ display: 'flex', gap: '25px', overflowX: 'hidden', padding: '10px 5px', scrollBehavior: 'smooth' }}>
-          {similar.length > 0 ? (
-            similar.map(item => (
-              <div key={item.id} className="pkg-card" onClick={() => navigate(`/package/${item.id}`)} style={{ minWidth: '280px', background: 'white', padding: '25px', borderRadius: '25px', border: '1px solid #f0f0f0', cursor: 'pointer' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}><span style={{ background: 'var(--oren)', color: 'white', padding: '2px 8px', borderRadius: '8px', fontSize: '9px', fontWeight: 800 }}>N.ly</span></div>
-                <Title level={5} style={{ marginTop: '15px', fontFamily: 'Narnoor', fontWeight: 700 }}>{item.name}</Title>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '5px' }}>
-                  <Title level={3} style={{ color: 'var(--oren)', margin: 0, fontFamily: 'Narnoor', fontWeight: 800 }}>{item.quota} GB</Title>
-                  <Text type="secondary" style={{ fontSize: '11px', fontFamily: 'Narnoor' }}>| {item.duration} Hari</Text>
-                </div>
-                <Text strong style={{ fontFamily: 'Narnoor', fontSize: '1rem' }}>Rp {item.price?.toLocaleString()}</Text>
-              </div>
-            ))
-          ) : (
-            <div style={{ width: '100%', padding: '40px 0', textAlign: 'center' }}>
-              <Empty description={<span style={{fontFamily:'Narnoor', color:'#999'}}>Tidak ada paket serupa untuk saat ini.</span>} />
+          {similar.length > 0 ? similar.map(item => (
+            <div key={item.id} className="pkg-card" onClick={() => navigate(`/package/${item.id}`)} style={{ minWidth: '280px', background: 'white', padding: '25px', borderRadius: '25px', border: '1px solid #f0f0f0', cursor: 'pointer' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}><span style={{ background: 'var(--oren)', color: 'white', padding: '2px 8px', borderRadius: '8px', fontSize: '9px', fontWeight: 800 }}>N.ly</span></div>
+              <Title level={5} style={{ marginTop: '15px', fontFamily: 'Narnoor', fontWeight: 700 }}>{item.name}</Title>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '5px' }}>
+                <Title level={3} style={{ color: 'var(--oren)', margin: 0, fontFamily: 'Narnoor', fontWeight: 800 }}>{item.quota} GB</Title><Text type="secondary" style={{ fontSize: '11px', fontFamily: 'Narnoor' }}>| {item.duration} Hari</Text>
+              </div><Text strong style={{ fontFamily: 'Narnoor', fontSize: '1rem' }}>Rp {item.price?.toLocaleString()}</Text>
             </div>
-          )}
+          )) : <div style={{width:'100%', textAlign:'center'}}><Empty description={<span style={{fontFamily:'Narnoor', color:'#999'}}>Tidak ada paket serupa.</span>} /></div>}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

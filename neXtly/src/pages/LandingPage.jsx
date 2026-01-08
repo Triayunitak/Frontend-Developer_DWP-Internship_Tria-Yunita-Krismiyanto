@@ -146,7 +146,7 @@ const LandingPage = () => {
           letterSpacing: '4px',
           fontWeight: 600
         }}>
-          COPYRIGHT © 2026 — neXtly PT Next With Me
+          Copyright © 2026 — neXtly PT Next With Me
         </p>
       </footer>
     </div>

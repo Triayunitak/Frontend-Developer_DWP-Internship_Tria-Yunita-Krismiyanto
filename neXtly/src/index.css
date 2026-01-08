@@ -23,6 +23,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* --- SCROLL CONTAINER --- */
 .scroll-container {
   height: 100vh;
   overflow-y: auto;
@@ -30,11 +31,30 @@ html, body {
   background-color: #f9f9f9;
   scroll-behavior: smooth;
 }
-
 .scroll-container::-webkit-scrollbar { width: 6px; }
 .scroll-container::-webkit-scrollbar-thumb { background: var(--oren); border-radius: 10px; }
 
-/* NAVIGATION ITEMS */
+/* --- NAVIGATION ITEMS (LANDING PAGE) --- */
+.nav-item {
+  color: var(--putih) !important;
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  border: none !important;
+}
+.nav-item:hover { 
+  background: var(--oren) !important; 
+  color: var(--putih) !important; 
+  box-shadow: 0 4px 15px rgba(255, 119, 0, 0.4); 
+}
+
+/* --- NAVIGATION ITEMS (DASHBOARD) --- */
 .nav-item-dash {
   color: var(--putih);
   padding: 6px 14px;
@@ -43,16 +63,38 @@ html, body {
   font-weight: 700;
   font-size: 0.75rem;
   transition: 0.3s ease;
+  border: none !important;
 }
-.nav-item-dash:hover, .nav-item-dash.active { background: var(--oren) !important; color: var(--putih) !important; }
-
-/* GLOBAL ICON NAV HOVER */
-.icon-nav-custom {
-  font-size: 1.5rem !important;
-  color: var(--hitam);
-  transition: all 0.3s ease;
+.nav-item-dash:hover, .nav-item-dash.active { 
+  background: var(--oren) !important; 
+  color: var(--putih) !important; 
 }
 
+/* --- BUTTON LOGIN HEADER (LANDING PAGE) --- */
+.btn-login-header {
+  background-color: var(--putih) !important;
+  color: var(--hitam) !important;
+  font-family: 'Narnoor', serif !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  height: 45px !important;
+  padding: 0 35px !important;
+  border-radius: 50px !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.btn-login-header:hover {
+  background-color: var(--oren) !important;
+  color: var(--putih) !important;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(255, 119, 0, 0.4) !important;
+}
+
+/* --- GLOBAL ICON BUTTONS (Nav, Bell, User, Arrows) --- */
 .btn-icon-nav {
   width: 50px !important;
   height: 50px !important;
@@ -62,12 +104,23 @@ html, body {
   background-color: var(--putih) !important;
   border: none !important;
   transition: all 0.3s ease !important;
-  cursor: pointer;
+  cursor: pointer !important;
 }
-.btn-icon-nav:hover { transform: scale(1.1); box-shadow: 0 0 15px rgba(255, 119, 0, 0.5); }
-.btn-icon-nav:hover .icon-nav-custom { color: var(--oren) !important; }
+.btn-icon-nav:hover { 
+  transform: scale(1.1); 
+  box-shadow: 0 0 15px rgba(255, 119, 0, 0.5); 
+}
 
-/* FILTER & BACK BUTTON HOVER */
+.icon-nav-custom {
+  font-size: 1.5rem !important;
+  color: var(--hitam);
+  transition: all 0.3s ease;
+}
+.btn-icon-nav:hover .icon-nav-custom { 
+  color: var(--oren) !important; /* Efek Hover Oren */
+}
+
+/* --- FILTER & BACK BUTTONS --- */
 .btn-filter-custom, .btn-back-detail {
   border-radius: 25px !important;
   height: 40px !important;
@@ -81,23 +134,25 @@ html, body {
   background: var(--putih) !important;
   cursor: pointer;
   color: var(--hitam) !important;
+  font-family: 'Narnoor', serif !important;
 }
-
 .btn-filter-custom:hover, .btn-back-detail:hover {
   color: var(--oren) !important;
   border-color: var(--oren) !important;
   box-shadow: 0 4px 10px rgba(255, 119, 0, 0.2);
 }
-
 .btn-filter-custom:hover .icon-filter, .btn-back-detail:hover .icon-back {
   color: var(--oren) !important;
 }
+.icon-filter, .icon-back { transition: color 0.3s ease; font-size: 1.1rem; }
 
-.icon-filter, .icon-back { transition: color 0.3s ease; }
-
-/* PREMIUM CARD */
+/* --- CARDS --- */
 .pkg-card {
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 1px solid transparent;
 }
-.pkg-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 30px rgba(255, 119, 0, 0.3) !important; border-color: var(--oren) !important; }
+.pkg-card:hover { 
+  transform: translateY(-8px) scale(1.02); 
+  box-shadow: 0 12px 30px rgba(255, 119, 0, 0.3) !important; 
+  border-color: var(--oren) !important; 
+}

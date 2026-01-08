@@ -31,15 +31,18 @@
   ],
   "packages": [
     {
-      "id": "1",
       "name": "Super Kaget",
+      "description": "Nikmati kuota melimpah untuk penggunaan media sosial seminggu penuh.",
+      "features": [
+        "7 GB Main Quota",
+        "14 Days Active",
+        "Bonus Youtube Apps"
+      ],
       "quota": 7,
       "duration": 14,
       "price": 15000,
       "type": "Best Deal",
-      "category": "weekly",
-      "description": "Nikmati kuota melimpah untuk penggunaan media sosial seminggu penuh.",
-      "features": ["7 GB Main Quota", "14 Days Active", "Bonus Youtube Apps"]
+      "id": "1"
     },
     {
       "id": "2",
@@ -50,7 +53,11 @@
       "type": "Student",
       "category": "daily",
       "description": "Khusus pelajar! Akses Zoom, Meet, dan Classroom tanpa kuota utama.",
-      "features": ["14 GB Main Quota", "7 Days Active", "Akses Zoom & Meet Sepuasnya"]
+      "features": [
+        "14 GB Main Quota",
+        "7 Days Active",
+        "Akses Zoom & Meet Sepuasnya"
+      ]
     },
     {
       "id": "3",
@@ -61,17 +68,88 @@
       "type": "Professional",
       "category": "monthly",
       "description": "Paket besar untuk produktivitas kerja tanpa batas di semua jaringan.",
-      "features": ["80 GB Main Quota", "28 Days Active", "High Speed Priority", "No FUP"]
+      "features": [
+        "80 GB Main Quota",
+        "28 Days Active",
+        "High Speed Priority",
+        "No FUP"
+      ]
+    },
+    {
+      "id": "7828",
+      "name": "Suka Suka Pelajar!",
+      "description": "Akan menjadi kesukaan mahasiswa Gen-Z",
+      "features": [
+        "70 GB",
+        "Netflix",
+        "Crunchyroll",
+        "Spotify"
+      ],
+      "quota": 70,
+      "duration": 31,
+      "price": 200,
+      "type": "Student"
+    },
+    {
+      "id": "8ec9",
+      "name": "Nagih Banget!!",
+      "description": "Rayakan kamu di New Year #Newme!",
+      "features": [
+        "100 GB",
+        "Netflix",
+        "Crunchyroll",
+        "Spotify",
+        "Youtube"
+      ],
+      "quota": 100,
+      "duration": 30,
+      "price": 250000,
+      "type": "Professional"
     }
   ],
   "transactions": [
-    { "id": 1, "packageId": "1", "type": "Best Deal", "month": "January", "amount": 15000 },
-    { "id": 2, "packageId": "2", "type": "Student", "month": "January", "amount": 25000 },
-    { "id": 3, "packageId": "1", "type": "Best Deal", "month": "February", "amount": 15000 }
+    {
+      "id": 1,
+      "packageId": "1",
+      "type": "Best Deal",
+      "month": "January",
+      "amount": 15000
+    },
+    {
+      "id": 2,
+      "packageId": "2",
+      "type": "Student",
+      "month": "January",
+      "amount": 25000
+    },
+    {
+      "id": 3,
+      "packageId": "1",
+      "type": "Best Deal",
+      "month": "February",
+      "amount": 15000
+    }
   ],
   "vouchers": [
-    { "id": "v1", "code": "HEMAT50", "discount": 5000, "minPurchase": 20000 },
-    { "id": "v2", "code": "MABA", "discount": 10000, "minPurchase": 50000 }
+    {
+      "id": "v1",
+      "code": "HEMAT50",
+      "discount": 5000,
+      "minPurchase": 20000
+    },
+    {
+      "id": "v2",
+      "code": "MABA",
+      "discount": 10000,
+      "minPurchase": 50000
+    }
   ],
-  "notifications": []
+  "notifications": [
+    {
+      "id": "1df8",
+      "message": "Paket Baru: Nagih Banget!! (100 GB) Telah Tersedia!",
+      "date": "1/8/2026, 5:49:25 PM",
+      "type": "info"
+    }
+  ]
 }
