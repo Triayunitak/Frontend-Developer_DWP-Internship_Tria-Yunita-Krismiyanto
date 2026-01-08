@@ -350,11 +350,11 @@ const Checkout = () => {
                 >
                   <Option value="BCA">BCA Virtual Account</Option>
                   <Option value="Mandiri">Mandiri Virtual Account</Option>
-                  <Option value="Mandiri">BRI Virtual Account</Option>
-                  <Option value="Mandiri">Dana</Option>
-                  <Option value="Mandiri">Pulsa</Option>
-                  <Option value="Mandiri">Seabank</Option>
-                  <Option value="Mandiri">QRIS</Option>
+                  <Option value="BRI">BRI Virtual Account</Option>
+                  <Option value="Dana">Dana</Option>
+                  <Option value="Pulsa">Pulsa</Option>
+                  <Option value="Seabank">Seabank</Option>
+                  <Option value="QRIS">QRIS</Option>
                   <Option value="GoPay">GoPay</Option>
                   <Option value="OVO">OVO</Option>
                 </Select>
