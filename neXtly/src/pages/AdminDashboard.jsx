@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Modal, Form, Input, InputNumber, Select, message, Layout, Menu, Badge, Popover, Card, Row, Col, Statistic, List, Typography } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, DashboardOutlined, ShoppingOutlined, BellOutlined, UserOutlined, LogoutOutlined, RocketOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, DashboardOutlined, ShoppingOutlined, BellOutlined, UserOutlined, LogoutOutlined, RocketOutlined, PercentageOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../hooks/useAuth';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import KelolaDiskon from './KelolaDiskon'; // IMPORT KOMPONEN BARU
 
 const { Header, Sider, Content } = Layout;
 const { Text } = Typography;
@@ -15,6 +16,7 @@ const AdminDashboard = () => {
   const [data, setData] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
   const [currentMenu, setCurrentMenu] = useState('1');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
@@ -26,6 +28,7 @@ const AdminDashboard = () => {
     fetchNotifications();
   }, []);
 
+  // ... (Fungsi fetchPackages, fetchTransactions, fetchNotifications, handleMarkAsRead, chartData, getRecommendation sama seperti sebelumnya)
   const fetchPackages = async () => {
     try {
       const res = await axios.get('http://localhost:3001/packages');
@@ -44,7 +47,19 @@ const AdminDashboard = () => {
     try {
       const res = await axios.get('http://localhost:3001/notifications');
       setNotifications(res.data.reverse());
+      const unread = res.data.filter(n => !n.read).length;
+      setUnreadCount(unread);
     } catch (err) { console.error(err); }
+  };
+
+  const handleMarkAsRead = () => {
+    if (unreadCount > 0) {
+      setUnreadCount(0);
+      notifications.forEach(async (n) => {
+        if (!n.read) await axios.patch(`http://localhost:3001/notifications/${n.id}`, { read: true });
+      });
+      setNotifications(notifications.map(n => ({ ...n, read: true })));
+    }
   };
 
   const chartData = [
@@ -77,15 +92,13 @@ const AdminDashboard = () => {
         message.success("Paket Diperbarui!");
       } else {
         await axios.post('http://localhost:3001/packages', formattedValues);
-        
-        // KIRIM NOTIFIKASI BARU KE DATABASE
         const newNotif = {
           message: `Paket Baru: ${values.name} (${values.quota} GB) Telah Tersedia!`,
           date: new Date().toLocaleString(),
-          type: "info"
+          type: "info",
+          read: false 
         };
         await axios.post('http://localhost:3001/notifications', newNotif);
-        
         fetchNotifications(); 
         message.success("Paket Ditambahkan & Notifikasi Terkirim!");
       }
@@ -113,9 +126,18 @@ const AdminDashboard = () => {
 
   const notifContent = (
     <div style={{ width: '300px', maxHeight: '400px', overflowY: 'auto', fontFamily: 'Narnoor' }}>
+      <div style={{padding: '10px', borderBottom: '1px solid #eee', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+        <Text strong>Notifikasi Admin</Text>
+        <Button type="link" size="small" onClick={handleMarkAsRead} style={{color: 'var(--oren)', fontSize: '10px'}}>Tandai dibaca</Button>
+      </div>
       <List dataSource={notifications} locale={{ emptyText: 'Tidak ada notifikasi' }}
         renderItem={(item) => (
-          <List.Item><div style={{ fontSize: '12px' }}><Text strong style={{ display: 'block', fontFamily: 'Narnoor' }}>{item.message}</Text><Text type="secondary" style={{ fontSize: '10px', fontFamily: 'Narnoor' }}>{item.date}</Text></div></List.Item>
+          <List.Item style={{ background: item.read ? 'white' : '#fff7e6' }}>
+            <div style={{ fontSize: '12px', width: '100%' }}>
+              <Text strong style={{ display: 'block', fontFamily: 'Narnoor' }}>{item.message}</Text>
+              <Text type="secondary" style={{ fontSize: '10px', fontFamily: 'Narnoor' }}>{item.date}</Text>
+            </div>
+          </List.Item>
         )}
       />
     </div>
@@ -130,14 +152,15 @@ const AdminDashboard = () => {
         <Menu theme="dark" mode="inline" selectedKeys={[currentMenu]} onClick={(e) => setCurrentMenu(e.key)} style={{ background: 'var(--hitam)' }}>
           <Menu.Item key="1" icon={<DashboardOutlined />}>Statistik</Menu.Item>
           <Menu.Item key="2" icon={<ShoppingOutlined />}>Kelola Paket</Menu.Item>
+          <Menu.Item key="3" icon={<PercentageOutlined />}>Kelola Diskon</Menu.Item> {/* MENU BARU */}
         </Menu>
       </Sider>
       
       <Layout>
         <Header style={{ background: 'white', padding: '0 25px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', height: '60px' }}>
-            <Popover content={notifContent} title={<span style={{fontFamily:'Narnoor'}}>Notifikasi Admin</span>} trigger="click" placement="bottomRight">
+            <Popover content={notifContent} trigger="click" placement="bottomRight">
               <span style={{ marginRight: 20, cursor: 'pointer', display: 'inline-flex' }}>
-                <Badge count={notifications.length}>
+                <Badge count={unreadCount}>
                   <BellOutlined style={{ fontSize: '1.2rem', color: 'var(--hitam)' }} />
                 </Badge>
               </span>
@@ -152,7 +175,7 @@ const AdminDashboard = () => {
         </Header>
 
         <Content style={{ padding: '20px' }}>
-          {currentMenu === '1' ? (
+          {currentMenu === '1' && (
             <div>
               <Row gutter={16}>
                 <Col span={16}>
@@ -172,7 +195,9 @@ const AdminDashboard = () => {
                 </Col>
               </Row>
             </div>
-          ) : (
+          )}
+          
+          {currentMenu === '2' && (
             <Card title="Package Management" extra={<Button type="primary" icon={<PlusOutlined />} onClick={() => { setEditingId(null); form.resetFields(); setIsModalOpen(true); }} style={{ background: 'var(--oren)', border: 'none' }}>Tambah Paket</Button>}>
               <Table dataSource={data} rowKey="id" size="small" columns={[
                   { title: 'Name', dataIndex: 'name' },
@@ -191,27 +216,29 @@ const AdminDashboard = () => {
               />
             </Card>
           )}
+
+          {/* RENDER KELOLA DISKON */}
+          {currentMenu === '3' && <KelolaDiskon />} 
         </Content>
 
+        {/* MODAL EDIT PAKET (HANYA MUNCUL DI MENU 2) */}
         <Modal title={editingId ? "Edit Paket" : "Tambah Paket"} open={isModalOpen} onCancel={() => setIsModalOpen(false)} onOk={() => form.submit()} width={500}>
           <Form form={form} layout="vertical" size="small" onFinish={onFinish}>
             <Form.Item name="name" label="Package Name" rules={[{required: true}]}><Input /></Form.Item>
             <Form.Item name="description" label="Detail Deskripsi" rules={[{required: true}]}><Input.TextArea rows={2} /></Form.Item>
-            <Form.Item name="features" label="Fitur (Pisahkan koma)" rules={[{required: true}]}><Input.TextArea rows={2} /></Form.Item>
+            <Form.Item name="features" label="Fitur (Pisahkan koma)" rules={[{required: true}]}><Input.TextArea rows={2} placeholder="Fitur 1, Fitur 2, Fitur 3" /></Form.Item>
             <Row gutter={10}>
               <Col span={12}><Form.Item name="quota" label="Quota (GB)" rules={[{required: true}]}><InputNumber min={1} style={{width:'100%'}}/></Form.Item></Col>
               <Col span={12}><Form.Item name="duration" label="Days" rules={[{required: true}]}>
                 <Select>
-                <Select.Option value={1}>1 Hari</ Select.Option>
-                <Select.Option value={7}>3 Hari</Select.Option>
-                <Select.Option value={7}>5 Hari</Select.Option>
+                <Select.Option value={1}>1 Hari</Select.Option>
+                <Select.Option value={3}>3 Hari</Select.Option>
+                <Select.Option value={5}>5 Hari</Select.Option>
                 <Select.Option value={7}>7 Hari</Select.Option>
-                <Select.Option value={7}>28 Hari</Select.Option>
-                <Select.Option value={7}>30 Hari</Select.Option>
-                <Select.Option value={30}>31 Hari</Select.Option>
-                </Select>
-                </Form.Item>
-              </Col>
+                <Select.Option value={28}>28 Hari</Select.Option>
+                <Select.Option value={30}>30 Hari</Select.Option>
+                <Select.Option value={31}>31 Hari</Select.Option>
+                </Select></Form.Item></Col>
             </Row>
             <Form.Item name="price" label="Price (Rp)" rules={[{required: true}]}><InputNumber min={0} style={{width:'100%'}}/></Form.Item>
             <Form.Item name="type" label="Category" rules={[{required: true}]}><Select><Select.Option value="Student">Student</Select.Option><Select.Option value="Professional">Professional</Select.Option><Select.Option value="Best Deal">Best Deal</Select.Option></Select></Form.Item>

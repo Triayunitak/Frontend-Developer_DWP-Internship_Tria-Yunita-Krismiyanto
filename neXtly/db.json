@@ -105,6 +105,34 @@
       "duration": 30,
       "price": 250000,
       "type": "Professional"
+    },
+    {
+      "id": "6fed",
+      "name": "Special Ulang Tahun neXtly!",
+      "description": "Gebyarkan semangatmu bersama kami!",
+      "features": [
+        "60 GB",
+        "Youtube",
+        "Netflix",
+        "Apple Music",
+        "Spotify"
+      ],
+      "quota": 60,
+      "duration": 31,
+      "price": 90000,
+      "type": "Best Deal"
+    },
+    {
+      "id": "3b13",
+      "name": "test",
+      "description": "tes",
+      "features": [
+        "tes"
+      ],
+      "quota": 70,
+      "duration": 31,
+      "price": 10000,
+      "type": "Student"
     }
   ],
   "transactions": [
@@ -149,7 +177,22 @@
       "id": "1df8",
       "message": "Paket Baru: Nagih Banget!! (100 GB) Telah Tersedia!",
       "date": "1/8/2026, 5:49:25 PM",
-      "type": "info"
+      "type": "info",
+      "read": true
+    },
+    {
+      "id": "2196",
+      "message": "Paket Baru: Special Ulang Tahun neXtly! (60 GB) Telah Tersedia!",
+      "date": "1/8/2026, 6:14:26 PM",
+      "type": "info",
+      "read": true
+    },
+    {
+      "id": "f924",
+      "message": "Paket Baru: test (70 GB) Telah Tersedia!",
+      "date": "1/8/2026, 6:20:55 PM",
+      "type": "info",
+      "read": true
     }
   ]
 }

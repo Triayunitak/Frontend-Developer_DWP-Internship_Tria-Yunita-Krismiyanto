@@ -47,3 +47,4 @@ global json : npm install -g json-server
 2 term : front = npm run dev http://localhost:5173 
          back = npm run backend http://localhost:3001
 install chart :npm install recharts
+               npm install framer-motion recharts
