@@ -136,9 +136,9 @@ const CustomerDashboard = () => {
                           <img src={logo} alt="Logo" style={{ height: '28px', transition: '0.3s' }} />
                        </div>
           
-                       <span className="nav-item-dash active" onClick={() => navigate('/dashboard')}>Internet Plan</span>
-                       <span className="nav-item-dash" onClick={() => navigate('/discount')}>Discount</span>
-                       <span className="nav-item-dash">History</span>
+                       <span className="nav-item-dash active" onClick={() => navigate('/Dashboard')}>Internet Plan</span>
+                       <span className="nav-item-dash" onClick={() => navigate('/Discount')}>Discount</span>
+                       <span className="nav-item-dash" onClick={() => navigate('/History')}>History</span>
                     </div>
 
           <Popover content={(<div style={{width:'150px', fontFamily: 'Narnoor'}}>{user ? <Button type="text" danger icon={<LogoutOutlined />} onClick={handleLogout} block style={{fontFamily: 'Narnoor'}}>Logout</Button> : <Button type="primary" onClick={() => navigate('/login')} block style={{background: 'var(--oren)', border:'none', fontFamily:'Narnoor'}}>Login</Button>}</div>)} title={user ? <span style={{fontFamily:'Narnoor'}}>{`Hi! ${user.username}`}</span> : "Profil"} trigger="click">

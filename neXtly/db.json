@@ -27,6 +27,13 @@
       "email": "tria@gmail.com",
       "password": "pwpwpw",
       "role": "customer"
+    },
+    {
+      "id": "d3d4",
+      "username": "yey",
+      "email": "tria11@gmail.com",
+      "password": "pwpwpwpw",
+      "role": "customer"
     }
   ],
   "packages": [
@@ -156,6 +163,98 @@
       "type": "Best Deal",
       "month": "February",
       "amount": 15000
+    },
+    {
+      "id": "5754",
+      "packageId": "2",
+      "userId": "2527",
+      "type": "Student",
+      "month": "January",
+      "amount": 20000,
+      "date": "1/8/2026, 9:19:26 PM",
+      "provider": "Telkomsel",
+      "phoneNumber": "082338516881",
+      "paymentMethod": "BCA",
+      "status": "Pending"
+    },
+    {
+      "id": "7ee5",
+      "packageId": "6fed",
+      "userId": "2527",
+      "type": "Best Deal",
+      "month": "January",
+      "amount": 72000,
+      "date": "1/8/2026, 9:28:58 PM",
+      "provider": "Telkomsel",
+      "phoneNumber": "082338516881",
+      "paymentMethod": "Mandiri",
+      "status": "Success"
+    },
+    {
+      "id": "648a",
+      "packageId": "6fed",
+      "userId": "2527",
+      "type": "Best Deal",
+      "month": "January",
+      "amount": 72000,
+      "date": "1/8/2026, 9:33:52 PM",
+      "provider": "Telkomsel",
+      "phoneNumber": "082338516881",
+      "paymentMethod": "BCA",
+      "status": "Success"
+    },
+    {
+      "id": "5db9",
+      "packageId": "6fed",
+      "userId": "2527",
+      "type": "Best Deal",
+      "month": "January",
+      "amount": 72000,
+      "date": "1/8/2026, 9:39:56 PM",
+      "provider": "Telkomsel",
+      "phoneNumber": "082338516881",
+      "paymentMethod": "Mandiri",
+      "status": "Pending"
+    },
+    {
+      "id": "2f73",
+      "packageId": "2",
+      "userId": "2527",
+      "type": "Student",
+      "month": "January",
+      "amount": 12500,
+      "date": "1/8/2026, 9:43:45 PM",
+      "provider": "Telkomsel",
+      "phoneNumber": "085311999046",
+      "paymentMethod": "Mandiri",
+      "status": "Success"
+    },
+    {
+      "id": "e020",
+      "packageId": "1",
+      "userId": "2527",
+      "type": "Best Deal",
+      "month": "January",
+      "amount": 12000,
+      "date": "1/8/2026, 9:47:25 PM",
+      "provider": "Telkomsel",
+      "phoneNumber": "085311999046",
+      "paymentMethod": "Mandiri",
+      "status": "Success"
+    },
+    {
+      "id": "193c",
+      "packageId": "6fed",
+      "userId": "2527",
+      "discountId": "d2",
+      "type": "Best Deal",
+      "month": "January",
+      "amount": 72000,
+      "date": "1/8/2026, 9:51:19 PM",
+      "provider": "Telkomsel",
+      "phoneNumber": "0853350006827",
+      "paymentMethod": "Mandiri",
+      "status": "Success"
     }
   ],
   "discounts": [
@@ -182,6 +281,14 @@
       "type": "Professional",
       "validUntil": "2026-01-09",
       "stock": 9
+    },
+    {
+      "id": "3bb7",
+      "name": "tes",
+      "percentage": 50,
+      "stock": 0,
+      "type": "General",
+      "validUntil": "2026-01-08"
     }
   ],
   "claimedDiscounts": [
@@ -202,6 +309,12 @@
       "userId": "2527",
       "discountId": "5232",
       "claimedAt": "1/8/2026, 8:20:18 PM"
+    },
+    {
+      "id": "a365",
+      "userId": "2527",
+      "discountId": "3bb7",
+      "claimedAt": "1/8/2026, 10:01:18 PM"
     }
   ],
   "notifications": [
@@ -251,6 +364,118 @@
       "id": "245e",
       "message": "Berhasil Klaim: Just for the Professional (50%). Gunakan Sebelum 2026-01-09",
       "date": "1/8/2026, 8:20:18 PM",
+      "type": "success",
+      "read": true
+    },
+    {
+      "id": "7a83",
+      "message": "Pesanan Dibuat: Special Student. Menunggu pembayaran...",
+      "date": "1/8/2026, 9:19:26 PM",
+      "type": "warning",
+      "read": true
+    },
+    {
+      "id": "9dc5",
+      "message": "Pembelian Berhasil: Special Ulang Tahun neXtly! (60 GB).",
+      "date": "1/8/2026, 9:23:31 PM",
+      "type": "success",
+      "read": true
+    },
+    {
+      "id": "1e75",
+      "message": "Pesanan Dibuat: Special Ulang Tahun neXtly!. Menunggu pembayaran...",
+      "date": "1/8/2026, 9:28:58 PM",
+      "type": "warning",
+      "read": true
+    },
+    {
+      "id": "b9fe",
+      "message": "Pembayaran Berhasil! Paket Special Ulang Tahun neXtly! untuk 082338516881 sudah aktif.",
+      "date": "1/8/2026, 9:29:28 PM",
+      "type": "success",
+      "read": true
+    },
+    {
+      "id": "62ba",
+      "message": "Pembelian Berhasil: Special Ulang Tahun neXtly! (60 GB).",
+      "date": "1/8/2026, 9:32:20 PM",
+      "type": "success",
+      "read": true
+    },
+    {
+      "id": "6861",
+      "message": "Pesanan Dibuat: Special Ulang Tahun neXtly!. Menunggu pembayaran...",
+      "date": "1/8/2026, 9:33:52 PM",
+      "type": "warning",
+      "read": true
+    },
+    {
+      "id": "f15b",
+      "message": "Pembayaran Berhasil! Paket Special Ulang Tahun neXtly! untuk 082338516881 sudah aktif.",
+      "date": "1/8/2026, 9:34:22 PM",
+      "type": "success",
+      "read": true
+    },
+    {
+      "id": "3554",
+      "message": "Pesanan Dibuat: Special Ulang Tahun neXtly!. Menunggu pembayaran...",
+      "date": "1/8/2026, 9:39:57 PM",
+      "type": "warning",
+      "read": true
+    },
+    {
+      "id": "0705",
+      "message": "Pesanan Dibuat: Special Student. Menunggu pembayaran...",
+      "date": "1/8/2026, 9:43:45 PM",
+      "type": "warning",
+      "read": true
+    },
+    {
+      "id": "0912",
+      "message": "Pembayaran Berhasil! Paket Special Student untuk 085311999046 sudah aktif.",
+      "date": "1/8/2026, 9:44:16 PM",
+      "type": "success",
+      "read": true
+    },
+    {
+      "id": "8f93",
+      "message": "Pesanan Dibuat: Super Kaget. Menunggu pembayaran...",
+      "date": "1/8/2026, 9:47:25 PM",
+      "type": "warning",
+      "read": true
+    },
+    {
+      "id": "bf27",
+      "message": "Pembayaran Berhasil! Paket Super Kaget untuk 085311999046 sudah aktif.",
+      "date": "1/8/2026, 9:47:55 PM",
+      "type": "success",
+      "read": true
+    },
+    {
+      "id": "bd22",
+      "message": "Pesanan Dibuat: Special Ulang Tahun neXtly!. Menunggu pembayaran...",
+      "date": "1/8/2026, 9:51:19 PM",
+      "type": "warning",
+      "read": true
+    },
+    {
+      "id": "0cef",
+      "message": "Pembayaran Berhasil! Paket Special Ulang Tahun neXtly! untuk 0853350006827 sudah aktif.",
+      "date": "1/8/2026, 9:51:49 PM",
+      "type": "success",
+      "read": true
+    },
+    {
+      "id": "abcc",
+      "message": "Promo Baru: tes Diskon 50%! Stok Terbatas: 1",
+      "date": "1/8/2026, 10:01:02 PM",
+      "type": "promo",
+      "read": true
+    },
+    {
+      "id": "4042",
+      "message": "Berhasil Klaim: tes (50%). Gunakan Sebelum 2026-01-08",
+      "date": "1/8/2026, 10:01:18 PM",
       "type": "success",
       "read": true
     }

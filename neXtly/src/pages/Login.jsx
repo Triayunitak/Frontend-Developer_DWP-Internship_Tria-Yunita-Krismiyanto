@@ -39,7 +39,7 @@ const Login = () => {
       <div style={{ background: 'white', padding: '20px 30px', borderRadius: '15px', width: '100%', maxWidth: '340px', boxShadow: '0 8px 24px rgba(0,0,0,0.1)' }}>
         <h2 style={{ textAlign: 'center', fontWeight: '800', fontSize: '1.1rem', marginBottom: '1vh' }}>Login</h2>
         <Button block icon={<GoogleOutlined />} style={{ borderRadius: '8px', height: '35px', fontSize: '0.8rem' }}>Login with Google</Button>
-        <Divider plain style={{ margin: '10px 0' }}><span style={{ color: '#999', fontSize: '9px' }}>or Email</span></Divider>
+        <Divider plain style={{ margin: '10px 0' }}><span style={{ color: '#999', fontSize: '9px' }}>or Login with Email</span></Divider>
         <Form layout="vertical" onFinish={onFinish} requiredMark={false}>
           <Form.Item label="Email" name="email"><Input style={{ borderRadius: '6px', height: '32px' }} /></Form.Item>
           <Form.Item label="Password" name="password"><Input.Password style={{ borderRadius: '6px', height: '32px' }} /></Form.Item>

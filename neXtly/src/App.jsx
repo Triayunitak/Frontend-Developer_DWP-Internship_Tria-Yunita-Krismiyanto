@@ -7,7 +7,9 @@ import Register from './pages/Register';
 import CustomerDashboard from './pages/Dashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import PackageDetail from './pages/PackageDetail';
-import Discount from './pages/Discount'; // Import halaman Discount Baru
+import Discount from './pages/Discount';
+import History from './pages/History';
+import Checkout from './pages/Checkout'; // Import Checkout
 
 const ProtectedRoute = ({ children }) => {
   const user = JSON.parse(localStorage.getItem('rememberedUser'));
@@ -28,10 +30,12 @@ function App() {
         <Route path="/register" element={<Register />} />
         
         <Route path="/dashboard" element={<CustomerDashboard />} />
-        <Route path="/discount" element={<Discount />} /> {/* Rute Baru */}
+        <Route path="/discount" element={<Discount />} />
+        <Route path="/history" element={<History />} />
         
+        {/* Route Detail & Checkout */}
         <Route path="/package/:id" element={<PackageDetail />} /> 
-        <Route path="/checkout/:id" element={<div style={{color:'white', padding: '50px'}}>Proses Pembayaran...</div>} />
+        <Route path="/checkout/:id" element={<Checkout />} /> {/* Rute Diperbarui */}
         
         <Route 
           path="/admin-dashboard" 

@@ -53,19 +53,15 @@ const PackageDetail = () => {
 
   const handleLogout = () => { logout(); message.success("Berhasil Logout"); navigate('/'); };
 
-  const handleBuy = async () => {
-    if(!user) { message.error("Silahkan Login terlebih dahulu"); navigate('/login'); return; }
-    try {
-      const newNotif = {
-        message: `Pembelian Berhasil: ${pkg.name} (${pkg.quota} GB).`,
-        date: new Date().toLocaleString(),
-        type: "success",
-        read: false
-      };
-      await axios.post('http://localhost:3001/notifications', newNotif);
-      message.success("Pembelian Berhasil!");
-      navigate(`/checkout/${pkg.id}`);
-    } catch(err) { message.error("Gagal memproses pembelian"); }
+  // PERBAIKAN: HANYA NAVIGASI KE CHECKOUT
+  const handleBuy = () => {
+    if (!user) {
+      message.error("Silahkan Login terlebih dahulu");
+      navigate('/login');
+      return;
+    }
+    // Langsung arahkan ke halaman checkout tanpa buat notifikasi/transaksi
+    navigate(`/checkout/${pkg.id}`);
   };
 
   const handleOpenNotif = async (open) => {
@@ -109,6 +105,7 @@ const PackageDetail = () => {
     <motion.div className="scroll-container" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
       <div style={{ backgroundImage: `url(${bgImage})`, height: '32vh', backgroundSize: 'cover', backgroundPosition: 'center', borderBottomLeftRadius: '50px', borderBottomRightRadius: '50px', position: 'relative', zIndex: 100 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: '35px 6%', alignItems: 'center' }}>
+          
           <Popover content={notifContent} title={<span style={{fontFamily:'Narnoor'}}>Notifikasi</span>} trigger="click" placement="bottomLeft" onOpenChange={handleOpenNotif}>
             <span style={{ marginRight: 20, cursor: 'pointer', display: 'inline-flex' }}>
               <Badge count={unreadCount}>
@@ -116,8 +113,8 @@ const PackageDetail = () => {
               </Badge>
             </span>
           </Popover>
+
           <div style={{ background: 'rgba(255,255,255,0.15)', padding: '6px 15px', borderRadius: '45px', display: 'flex', alignItems: 'center', gap: '15px', backdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-          
              <div 
                onMouseEnter={() => setLogo(logoDark)} 
                onMouseLeave={() => setLogo(logoDefault)}
@@ -129,8 +126,9 @@ const PackageDetail = () => {
 
              <span className="nav-item-dash active" onClick={() => navigate('/dashboard')}>Internet Plan</span>
              <span className="nav-item-dash" onClick={() => navigate('/discount')}>Discount</span>
-             <span className="nav-item-dash">History</span>
+             <span className="nav-item-dash" onClick={() => navigate('/history')}>History</span>
           </div>
+
           <Popover content={profileMenu} trigger="click" placement="bottomRight">
             <div style={{ background: 'rgba(255,255,255,0.9)', padding: '10px 25px', borderRadius: '35px', display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', height: '50px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
               <span style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--hitam)', fontFamily: 'Narnoor' }}>{user ? `Hi! ${user.username}` : 'Guest Account'}</span>
@@ -166,6 +164,8 @@ const PackageDetail = () => {
             <List split={false} dataSource={pkg.features || []} 
               renderItem={item => (<List.Item style={{padding: '5px 0', border: 'none'}}><Text style={{fontFamily: 'Narnoor', fontSize: '15px'}}><ArrowRightOutlined style={{ color: 'var(--oren)', marginRight: 10 }} /> {item}</Text></List.Item>)} 
             />
+            
+            {/* BUTTON BUY NOW */}
             <Button size="large" block onClick={handleBuy}
               style={{ background: 'linear-gradient(to right, #FF7700, #C62129)', color: 'white', borderRadius: '15px', height: '55px', marginTop: '40px', fontWeight: 800, fontSize: '1.2rem', border: 'none', boxShadow: '0 8px 20px rgba(255, 119, 0, 0.3)', fontFamily: 'Narnoor' }}>Buy Now</Button>
           </div>

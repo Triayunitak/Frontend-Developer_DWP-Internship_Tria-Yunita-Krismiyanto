@@ -34,7 +34,7 @@ const Discount = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Filter logic
+  // Filter logic diperbaiki
   useEffect(() => {
     if (discounts.length > 0) {
       filterDiscounts(activeTab);
@@ -45,7 +45,8 @@ const Discount = () => {
     try {
       const res = await axios.get('http://localhost:3001/discounts');
       setDiscounts(res.data);
-      setFilteredDiscounts(res.data);
+      // Init: Hanya tampilkan yang stok > 0
+      setFilteredDiscounts(res.data.filter(d => d.stock > 0));
     } catch (err) { message.error("Gagal memuat diskon"); }
   };
 
@@ -75,11 +76,17 @@ const Discount = () => {
     }
   };
 
+  // --- PERBAIKAN LOGIKA FILTER (HIDE STOK 0) ---
   const filterDiscounts = (tab) => {
+    // 1. Filter Stok: Hanya ambil yang stok > 0
+    const availableDiscounts = discounts.filter(d => d.stock > 0);
+
     if (tab === 'All') {
-      setFilteredDiscounts(discounts);
+      // Tampilkan SEMUA (yang stoknya ada)
+      setFilteredDiscounts(availableDiscounts);
     } else {
-      setFilteredDiscounts(discounts.filter(d => d.type === tab || d.type === 'General'));
+      // Tampilkan HANYA tipe yang sesuai tab & stoknya ada
+      setFilteredDiscounts(availableDiscounts.filter(d => d.type === tab));
     }
   };
 
@@ -87,9 +94,10 @@ const Discount = () => {
   const handleClaim = async (discount) => {
     if (!user) { message.error("Silahkan login untuk klaim!"); return navigate('/login'); }
 
-    // 1. Cek Stok Habis
+    // 1. Cek Stok Habis (Backup validation, although card is hidden)
     if (discount.stock <= 0) {
       message.error("Maaf, stok diskon ini sudah habis!");
+      fetchDiscounts(); // Refresh agar card menghilang
       return;
     }
 
@@ -124,7 +132,7 @@ const Discount = () => {
 
       message.success("Diskon Berhasil Diklaim!");
       
-      // 6. Refresh Data
+      // 6. Refresh Data (Card akan otomatis hilang jika stok jadi 0 karena fetchDiscounts dipanggil)
       fetchDiscounts();
       fetchNotifications();
       fetchClaimedDiscounts();
@@ -155,6 +163,12 @@ const Discount = () => {
     </div>
   );
 
+  const profileMenu = (
+    <div style={{ width: '150px', fontFamily: 'Narnoor' }}>
+      {user ? <Button type="text" danger icon={<LogoutOutlined />} onClick={handleLogout} block style={{fontFamily: 'Narnoor'}}>Logout</Button> : <Button type="primary" onClick={() => navigate('/login')} block style={{background: 'var(--oren)', border:'none', fontFamily:'Narnoor'}}>Login</Button>}
+    </div>
+  );
+
   return (
     <motion.div className="scroll-container" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
   
@@ -170,22 +184,21 @@ const Discount = () => {
           </Popover>
 
           <div style={{ background: 'rgba(255,255,255,0.15)', padding: '6px 15px', borderRadius: '45px', display: 'flex', alignItems: 'center', gap: '15px', backdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                              
-                                 <div 
-                                   onMouseEnter={() => setLogo(logoDark)} 
-                                   onMouseLeave={() => setLogo(logoDefault)}
-                                   style={{ padding: '0 10px', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-                                   onClick={() => navigate('/')}
-                                 >
-                                    <img src={logo} alt="Logo" style={{ height: '28px', transition: '0.3s' }} />
-                                 </div>
-                    
-                                 <span className="nav-item-dash" onClick={() => navigate('/dashboard')}>Internet Plan</span>
-                                 <span className="nav-item-dash active" onClick={() => navigate('/discount')}>Discount</span>
-                                 <span className="nav-item-dash">History</span>
-                              </div>
+             <div 
+               onMouseEnter={() => setLogo(logoDark)} 
+               onMouseLeave={() => setLogo(logoDefault)}
+               style={{ padding: '0 10px', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+               onClick={() => navigate('/')}
+             >
+                <img src={logo} alt="Logo" style={{ height: '28px', transition: '0.3s' }} />
+             </div>
+             
+             <span className="nav-item-dash" onClick={() => navigate('/Dashboard')}>Internet Plan</span>
+             <span className="nav-item-dash active" onClick={() => navigate('/Discount')}>Discount</span>
+             <span className="nav-item-dash" onClick={() => navigate('/History')}>History</span>
+          </div>
 
-          <Popover content={(<div style={{width:'150px', fontFamily: 'Narnoor'}}>{user ? <Button type="text" danger icon={<LogoutOutlined />} onClick={handleLogout} block style={{fontFamily: 'Narnoor'}}>Logout</Button> : <Button type="primary" onClick={() => navigate('/login')} block style={{background: 'var(--oren)', border:'none', fontFamily:'Narnoor'}}>Login</Button>}</div>)} title={user ? <span style={{fontFamily:'Narnoor'}}>{`Hi! ${user.username}`}</span> : "Profil"} trigger="click">
+          <Popover content={profileMenu} trigger="click" placement="bottomRight">
             <div style={{ background: 'rgba(255,255,255,0.9)', padding: '10px 25px', borderRadius: '35px', display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', height: '50px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
               <span style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--hitam)', fontFamily: 'Narnoor' }}>{user ? `Hi! ${user.username}` : 'Guest'}</span>
               <Button shape="circle" size="small" style={{ width: '35px', height: '35px', background: 'var(--hitam)', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }} icon={<UserOutlined style={{ color: 'white' }} />} />
@@ -230,6 +243,8 @@ const Discount = () => {
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ background: 'var(--oren)', color: 'white', padding: '2px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: 800, fontFamily: 'Narnoor' }}>N.ly</span>
+                  
+                  {/* LABEL HANYA MUNCUL JIKA TIPE BUKAN GENERAL */}
                   {item.type !== 'General' && (
                     <span style={{ background: 'var(--merah)', color: 'white', padding: '2px 12px', borderRadius: '12px', fontSize: '10px', fontWeight: 700, fontFamily: 'Narnoor' }}>{item.type}</span>
                   )}
@@ -250,7 +265,7 @@ const Discount = () => {
                 <div style={{ marginTop: 'auto', opacity: hoveredId === item.id ? 1 : 0, transition: '0.3s', paddingTop: '15px' }}>
                   <Button 
                     block 
-                    disabled={isClaimed || item.stock <= 0} // Disabled jika sudah klaim atau stok habis
+                    disabled={isClaimed} // Disabled jika sudah klaim
                     style={{ 
                       background: isClaimed ? '#ccc' : 'var(--oren)', 
                       color: 'white', 
@@ -262,7 +277,7 @@ const Discount = () => {
                     }} 
                     onClick={() => handleClaim(item)}
                   >
-                    {isClaimed ? "Sudah Diklaim" : item.stock <= 0 ? "Stok Habis" : "Claim Discount"}
+                    {isClaimed ? "Sudah Diklaim" : "Claim Discount"}
                   </Button>
                 </div>
               </div>
@@ -270,7 +285,7 @@ const Discount = () => {
           })}
         </div>
 
-        {filteredDiscounts.length === 0 && <Empty style={{marginTop: '50px'}} description={<span style={{fontFamily:'Narnoor', color:'#999'}}>Tidak ada diskon tersedia untuk kategori ini.</span>} />}
+        {filteredDiscounts.length === 0 && <Empty style={{marginTop: '50px'}} description={<span style={{fontFamily:'Narnoor', color:'#999'}}>Tidak ada diskon tersedia.</span>} />}
       </div>
     </motion.div>
   );
