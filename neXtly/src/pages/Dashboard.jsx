@@ -5,6 +5,7 @@ import { BellOutlined, UserOutlined, FilterOutlined, LogoutOutlined } from '@ant
 import axios from 'axios';
 import { useAuth } from '../hooks/useAuth';
 import bgImage from '../assets/background.png';
+import logoDefault from '../assets/logo bulet default.png';
 import logoDark from '../assets/logo dark theme.png';
 import { motion } from 'framer-motion';
 
@@ -22,6 +23,7 @@ const CustomerDashboard = () => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [filterDuration, setFilterDuration] = useState('All');
+  const [logo, setLogo] = useState(logoDefault);
   const [filterPrice, setFilterPrice] = useState(1000000); 
 
   useEffect(() => {
@@ -123,11 +125,21 @@ const CustomerDashboard = () => {
             </span>
           </Popover>
 
-          <div style={{ background: 'rgba(255,255,255,0.15)', padding: '10px 15px', borderRadius: '45px', display: 'flex', alignItems: 'center', gap: '15px', backdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-             <img src={logoDark} style={{height: '30px', margin: '0 10px', cursor: 'pointer'}} onClick={() => navigate('/')} />
-             <span className="nav-item-dash active" onClick={() => {setActiveTab('All'); setFilteredPkgs(packages);}}>Internet Plan</span>
-             <span className="nav-item-dash">Discount</span><span className="nav-item-dash">History</span>
-          </div>
+          <div style={{ background: 'rgba(255,255,255,0.15)', padding: '6px 15px', borderRadius: '45px', display: 'flex', alignItems: 'center', gap: '15px', backdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    
+                       <div 
+                         onMouseEnter={() => setLogo(logoDark)} 
+                         onMouseLeave={() => setLogo(logoDefault)}
+                         style={{ padding: '0 10px', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+                         onClick={() => navigate('/')}
+                       >
+                          <img src={logo} alt="Logo" style={{ height: '28px', transition: '0.3s' }} />
+                       </div>
+          
+                       <span className="nav-item-dash active" onClick={() => navigate('/dashboard')}>Internet Plan</span>
+                       <span className="nav-item-dash" onClick={() => navigate('/discount')}>Discount</span>
+                       <span className="nav-item-dash">History</span>
+                    </div>
 
           <Popover content={(<div style={{width:'150px', fontFamily: 'Narnoor'}}>{user ? <Button type="text" danger icon={<LogoutOutlined />} onClick={handleLogout} block style={{fontFamily: 'Narnoor'}}>Logout</Button> : <Button type="primary" onClick={() => navigate('/login')} block style={{background: 'var(--oren)', border:'none', fontFamily:'Narnoor'}}>Login</Button>}</div>)} title={user ? <span style={{fontFamily:'Narnoor'}}>{`Hi! ${user.username}`}</span> : "Profil"} trigger="click">
             

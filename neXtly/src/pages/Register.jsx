@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, message, Divider } from 'antd';
 import { GoogleOutlined } from '@ant-design/icons';
 import axios from 'axios';
-
-import logoDark from '../assets/logo dark theme.png';
+import Darktheme from '../assets/Dark theme.png';
 import bgImage from '../assets/background.png';
 
 const Register = () => {
@@ -38,7 +37,7 @@ const Register = () => {
       alignItems: 'center',
       padding: '20px'
     }}>
-      <img src={logoDark} alt="Logo" style={{ height: '45px', marginBottom: '2vh' }} />
+      <img src={Darktheme} alt="Logo" style={{ height: '45px', marginBottom: '2vh' }} />
       
       <div style={{ 
         background: 'white', 

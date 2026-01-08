@@ -5,6 +5,7 @@ import { ArrowLeftOutlined, LeftOutlined, RightOutlined, UserOutlined, BellOutli
 import axios from 'axios';
 import { useAuth } from '../hooks/useAuth';
 import bgImage from '../assets/background.png';
+import logoDefault from '../assets/logo bulet default.png';
 import logoDark from '../assets/logo dark theme.png';
 import { motion } from 'framer-motion';
 
@@ -19,6 +20,7 @@ const PackageDetail = () => {
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [logo, setLogo] = useState(logoDefault);
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -114,10 +116,20 @@ const PackageDetail = () => {
               </Badge>
             </span>
           </Popover>
-          <div style={{ background: 'rgba(255,255,255,0.15)', padding: '10px 15px', borderRadius: '45px', display: 'flex', alignItems: 'center', gap: '15px', backdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-             <img src={logoDark} style={{ height: '30px', margin: '0 10px', cursor: 'pointer' }} onClick={() => navigate('/dashboard')} />
+          <div style={{ background: 'rgba(255,255,255,0.15)', padding: '6px 15px', borderRadius: '45px', display: 'flex', alignItems: 'center', gap: '15px', backdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+          
+             <div 
+               onMouseEnter={() => setLogo(logoDark)} 
+               onMouseLeave={() => setLogo(logoDefault)}
+               style={{ padding: '0 10px', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+               onClick={() => navigate('/')}
+             >
+                <img src={logo} alt="Logo" style={{ height: '28px', transition: '0.3s' }} />
+             </div>
+
              <span className="nav-item-dash active" onClick={() => navigate('/dashboard')}>Internet Plan</span>
-             <span className="nav-item-dash">Discount</span><span className="nav-item-dash">History</span>
+             <span className="nav-item-dash" onClick={() => navigate('/discount')}>Discount</span>
+             <span className="nav-item-dash">History</span>
           </div>
           <Popover content={profileMenu} trigger="click" placement="bottomRight">
             <div style={{ background: 'rgba(255,255,255,0.9)', padding: '10px 25px', borderRadius: '35px', display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', height: '50px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>

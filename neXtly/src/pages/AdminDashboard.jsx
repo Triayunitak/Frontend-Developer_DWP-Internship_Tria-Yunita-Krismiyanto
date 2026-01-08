@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../hooks/useAuth';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import KelolaDiskon from './KelolaDiskon'; // IMPORT KOMPONEN BARU
+import KelolaDiskon from './KelolaDiskon';
 
 const { Header, Sider, Content } = Layout;
 const { Text } = Typography;
@@ -26,9 +26,20 @@ const AdminDashboard = () => {
     fetchPackages(); 
     fetchTransactions();
     fetchNotifications();
-  }, []);
 
-  // ... (Fungsi fetchPackages, fetchTransactions, fetchNotifications, handleMarkAsRead, chartData, getRecommendation sama seperti sebelumnya)
+    // TAMBAHAN: Polling interval agar Admin juga mendapat update notifikasi real-time
+    const interval = setInterval(async () => {
+      const resNotif = await axios.get('http://localhost:3001/notifications');
+      if (resNotif.data.length > notifications.length) {
+        setNotifications(resNotif.data.reverse());
+        const unread = resNotif.data.filter(n => !n.read).length;
+        setUnreadCount(unread);
+        message.info("Notifikasi Baru Masuk!");
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [notifications.length]);
+
   const fetchPackages = async () => {
     try {
       const res = await axios.get('http://localhost:3001/packages');
@@ -152,7 +163,7 @@ const AdminDashboard = () => {
         <Menu theme="dark" mode="inline" selectedKeys={[currentMenu]} onClick={(e) => setCurrentMenu(e.key)} style={{ background: 'var(--hitam)' }}>
           <Menu.Item key="1" icon={<DashboardOutlined />}>Statistik</Menu.Item>
           <Menu.Item key="2" icon={<ShoppingOutlined />}>Kelola Paket</Menu.Item>
-          <Menu.Item key="3" icon={<PercentageOutlined />}>Kelola Diskon</Menu.Item> {/* MENU BARU */}
+          <Menu.Item key="3" icon={<PercentageOutlined />}>Kelola Diskon</Menu.Item>
         </Menu>
       </Sider>
       
@@ -217,11 +228,10 @@ const AdminDashboard = () => {
             </Card>
           )}
 
-          {/* RENDER KELOLA DISKON */}
-          {currentMenu === '3' && <KelolaDiskon />} 
+          {/* RENDER KELOLA DISKON DENGAN PROP CALLBACK UNTUK REFRESH NOTIF */}
+          {currentMenu === '3' && <KelolaDiskon onSuccess={fetchNotifications} />} 
         </Content>
 
-        {/* MODAL EDIT PAKET (HANYA MUNCUL DI MENU 2) */}
         <Modal title={editingId ? "Edit Paket" : "Tambah Paket"} open={isModalOpen} onCancel={() => setIsModalOpen(false)} onOk={() => form.submit()} width={500}>
           <Form form={form} layout="vertical" size="small" onFinish={onFinish}>
             <Form.Item name="name" label="Package Name" rules={[{required: true}]}><Input /></Form.Item>
@@ -239,7 +249,7 @@ const AdminDashboard = () => {
                 <Select.Option value={30}>30 Hari</Select.Option>
                 <Select.Option value={31}>31 Hari</Select.Option>
                 </Select></Form.Item></Col>
-            </Row>
+              </Row>
             <Form.Item name="price" label="Price (Rp)" rules={[{required: true}]}><InputNumber min={0} style={{width:'100%'}}/></Form.Item>
             <Form.Item name="type" label="Category" rules={[{required: true}]}><Select><Select.Option value="Student">Student</Select.Option><Select.Option value="Professional">Professional</Select.Option><Select.Option value="Best Deal">Best Deal</Select.Option></Select></Form.Item>
           </Form>

@@ -158,18 +158,50 @@
       "amount": 15000
     }
   ],
-  "vouchers": [
+  "discounts": [
     {
-      "id": "v1",
-      "code": "HEMAT50",
-      "discount": 5000,
-      "minPurchase": 20000
+      "id": "d1",
+      "name": "Promo Pelajar Ceria",
+      "percentage": 50,
+      "type": "Student",
+      "validUntil": "2026-12-31",
+      "stock": 9
     },
     {
-      "id": "v2",
-      "code": "MABA",
-      "discount": 10000,
-      "minPurchase": 50000
+      "id": "d2",
+      "name": "Diskon Gajian",
+      "percentage": 20,
+      "type": "General",
+      "validUntil": "2026-06-30",
+      "stock": 9
+    },
+    {
+      "id": "5232",
+      "name": "Just for the Professional",
+      "percentage": 50,
+      "type": "Professional",
+      "validUntil": "2026-01-09",
+      "stock": 9
+    }
+  ],
+  "claimedDiscounts": [
+    {
+      "id": "7b8a",
+      "userId": "2527",
+      "discountId": "d2",
+      "claimedAt": "1/8/2026, 8:14:23 PM"
+    },
+    {
+      "id": "1040",
+      "userId": "2527",
+      "discountId": "d1",
+      "claimedAt": "1/8/2026, 8:19:11 PM"
+    },
+    {
+      "id": "16ed",
+      "userId": "2527",
+      "discountId": "5232",
+      "claimedAt": "1/8/2026, 8:20:18 PM"
     }
   ],
   "notifications": [
@@ -192,6 +224,34 @@
       "message": "Paket Baru: test (70 GB) Telah Tersedia!",
       "date": "1/8/2026, 6:20:55 PM",
       "type": "info",
+      "read": true
+    },
+    {
+      "id": "b47f",
+      "message": "Promo Baru: Just for the Professional Diskon 50%!",
+      "date": "1/8/2026, 7:52:20 PM",
+      "type": "promo",
+      "read": true
+    },
+    {
+      "id": "96ab",
+      "message": "Berhasil Klaim: Diskon Gajian (20%). Gunakan sebelum 2026-08-01.",
+      "date": "1/8/2026, 8:14:23 PM",
+      "type": "success",
+      "read": true
+    },
+    {
+      "id": "7b66",
+      "message": "Berhasil Klaim: Promo Pelajar Ceria (50%). Gunakan Sebelum undefined",
+      "date": "1/8/2026, 8:19:11 PM",
+      "type": "success",
+      "read": true
+    },
+    {
+      "id": "245e",
+      "message": "Berhasil Klaim: Just for the Professional (50%). Gunakan Sebelum 2026-01-09",
+      "date": "1/8/2026, 8:20:18 PM",
+      "type": "success",
       "read": true
     }
   ]

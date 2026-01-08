@@ -48,3 +48,4 @@ global json : npm install -g json-server
          back = npm run backend http://localhost:3001
 install chart :npm install recharts
                npm install framer-motion recharts
+               npm install moment

@@ -4,7 +4,7 @@ import { Form, Input, Button, Checkbox, message, Divider } from 'antd';
 import { GoogleOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useAuth } from '../hooks/useAuth';
-import logoDark from '../assets/logo dark theme.png';
+import Darktheme from '../assets/Dark theme.png';
 import bgImage from '../assets/background.png';
 
 const Login = () => {
@@ -35,7 +35,7 @@ const Login = () => {
 
   return (
     <div style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '10px' }}>
-      <img src={logoDark} alt="Logo" style={{ height: '35px', marginBottom: '1.5vh' }} />
+      <img src={Darktheme} alt="Logo" style={{ height: '35px', marginBottom: '1.5vh' }} />
       <div style={{ background: 'white', padding: '20px 30px', borderRadius: '15px', width: '100%', maxWidth: '340px', boxShadow: '0 8px 24px rgba(0,0,0,0.1)' }}>
         <h2 style={{ textAlign: 'center', fontWeight: '800', fontSize: '1.1rem', marginBottom: '1vh' }}>Login</h2>
         <Button block icon={<GoogleOutlined />} style={{ borderRadius: '8px', height: '35px', fontSize: '0.8rem' }}>Login with Google</Button>
