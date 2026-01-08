@@ -5,8 +5,8 @@ Tria Yunita Krismiyanto Introductory Questions - Frontend Developer
 ## Development Time Log
 
 - Start Date & Time  : 2026-01-06 09:51 WIB
-- End Date & Time    : 2026-01-08 17:00 WIB
-- Total Duration     : 2 Days, hours 30 minutes
+- End Date & Time    : 2026-01-08 22:18 WIB
+- Total Duration     : 2 days, 12 hours, 27 minutes
 
 Detail progress:
 ### 1. Requirement Analysis & UX Planning
@@ -26,14 +26,14 @@ Detail progress:
 - Notes       : Set-up repo + foundation, Connecting API.
 
 ### 4. Frontend Development (React & Hooks), Integration & State Handling
-- Timeline    : 2026-01-08 07:49 WIB – 2026-01-08 ? WIB
-- Duration    : 
+- Timeline    : 2026-01-08 07:49 WIB – 2026-01-08 21:48 WIB
+- Duration    : 13 hours 59 minutes
 - Notes       : Implementing pages, components, CRUD simulation using json-server, form validation,
                 and error handling, bug fixing and React hooks.
 
 ### 6. Testing & Refinement
-- Timeline    : 2026-01-08 07:49 WIB – 2026-01-08 ? WIB
-- Duration    :
+- Timeline    : 2026-01-08 20:45 WIB – 2026-01-08 22:18 WIB
+- Duration    : 1 hours 33 minutes
 - Notes       : UI polish, UX flow checking, and final adjustments.
 
 The development was completed in one focused session.
