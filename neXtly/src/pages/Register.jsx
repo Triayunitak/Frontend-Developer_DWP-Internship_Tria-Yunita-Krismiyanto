@@ -44,7 +44,7 @@ const Register = () => {
         padding: '25px 35px', 
         borderRadius: '20px', 
         width: '100%',
-        maxWidth: '380px', // Disesuaikan dengan Login agar konsisten
+        maxWidth: '380px',
         boxShadow: '0 8px 24px rgba(0,0,0,0.15)'
       }}>
         <h2 style={{ textAlign: 'center', fontWeight: '800', fontSize: '1.3rem', marginBottom: '1.5vh' }}>Register</h2>

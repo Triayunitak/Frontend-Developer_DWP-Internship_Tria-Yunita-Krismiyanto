@@ -143,7 +143,6 @@ const CustomerDashboard = () => {
 
           <Popover content={(<div style={{width:'150px', fontFamily: 'Narnoor'}}>{user ? <Button type="text" danger icon={<LogoutOutlined />} onClick={handleLogout} block style={{fontFamily: 'Narnoor'}}>Logout</Button> : <Button type="primary" onClick={() => navigate('/login')} block style={{background: 'var(--oren)', border:'none', fontFamily:'Narnoor'}}>Login</Button>}</div>)} title={user ? <span style={{fontFamily:'Narnoor'}}>{`Hi! ${user.username}`}</span> : "Profil"} trigger="click">
             
-            {/* FIXED PROFIL KAPSUL: Remove 'btn-icon-nav' class on the user icon button */}
             <div style={{ background: 'rgba(255,255,255,0.9)', padding: '10px 25px', borderRadius: '35px', display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', height: '50px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
               <span style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--hitam)', fontFamily: 'Narnoor' }}>{user ? `Hi! ${user.username}` : 'Silahkan Login!'}</span>
               <Button shape="circle" size="small" style={{ width: '35px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--hitam)', border: 'none' }} icon={<UserOutlined style={{ fontSize: '1.2rem', color: 'var(--putih)' }} />} />

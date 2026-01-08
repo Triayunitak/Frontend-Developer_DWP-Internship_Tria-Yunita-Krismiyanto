@@ -19,7 +19,7 @@ const Login = () => {
       const foundUser = res.data.find(u => u.email === values.email && u.password === values.password);
 
       if (foundUser) {
-        // Simpan seluruh objek user agar username muncul
+        
         login(foundUser, values.remember);
         message.success(`Selamat datang, ${foundUser.username}!`);
         foundUser.role === 'admin' ? navigate('/admin-dashboard') : navigate('/dashboard');

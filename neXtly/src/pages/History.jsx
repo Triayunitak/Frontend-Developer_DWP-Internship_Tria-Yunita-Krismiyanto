@@ -29,7 +29,7 @@ const History = () => {
   const [allPackages, setAllPackages] = useState([]);
 
   // State untuk Filter Waktu
-  const [timeFilter, setTimeFilter] = useState('All Time'); // Default All Time
+  const [timeFilter, setTimeFilter] = useState('All Time');
 
   useEffect(() => {
     fetchData();
@@ -44,7 +44,7 @@ const History = () => {
     if (user) {
       combineAndFilterData();
     }
-  }, [transactions, claimedDiscounts, activeTab, timeFilter, user]); // Tambahkan timeFilter ke dependency
+  }, [transactions, claimedDiscounts, activeTab, timeFilter, user]); 
 
   const fetchData = async () => {
     try {
@@ -69,19 +69,11 @@ const History = () => {
 
   const combineAndFilterData = () => {
     let combined = [];
-
-    // Format Data Transaksi (Pastikan tanggal valid untuk filter)
-    // Di db.json transaksi belum ada field 'date' yang spesifik, kita gunakan simulasi 'month' atau tambahkan field date di db.json
-    // Untuk demo filter ini berjalan, asumsikan kita pakai properti 'month' atau field baru 'transactionDate' jika ada.
-    // Jika tidak ada, filter waktu mungkin tidak akurat tanpa data tanggal yang valid di transaksi.
-    // SEMENTARA: Kita pakai tanggal hari ini untuk semua transaksi agar filter terlihat (Simulasi).
-    // DI PRODUKSI: Pastikan db.json transaksi punya field "date": "YYYY-MM-DD"
-    
     const transFormatted = transactions.map(t => ({
       type: 'Internet Plan',
       name: `Paket ${t.type}`, 
-      date: t.date || new Date().toLocaleDateString(), // Fallback ke hari ini jika tidak ada tanggal
-      rawDate: t.date ? moment(t.date) : moment(), // Untuk filtering
+      date: t.date || new Date().toLocaleDateString(), 
+      rawDate: t.date ? moment(t.date) : moment(),
       amount: t.amount,
       status: 'Success',
       packageId: t.packageId,
@@ -178,7 +170,6 @@ const History = () => {
     </div>
   );
 
-  // Konten Dropdown Filter Waktu
   const timeFilterContent = (
     <div style={{ width: '150px', fontFamily: 'Narnoor' }}>
       {['All Time', 'Hari ini', 'Kemarin', 'Bulan ini', 'Tahun ini'].map(filter => (

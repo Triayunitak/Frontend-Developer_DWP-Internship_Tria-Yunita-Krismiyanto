@@ -45,7 +45,7 @@ const Discount = () => {
     try {
       const res = await axios.get('http://localhost:3001/discounts');
       setDiscounts(res.data);
-      // Init: Hanya tampilkan yang stok > 0
+      
       setFilteredDiscounts(res.data.filter(d => d.stock > 0));
     } catch (err) { message.error("Gagal memuat diskon"); }
   };
@@ -78,14 +78,14 @@ const Discount = () => {
 
   // --- PERBAIKAN LOGIKA FILTER (HIDE STOK 0) ---
   const filterDiscounts = (tab) => {
-    // 1. Filter Stok: Hanya ambil yang stok > 0
+    
     const availableDiscounts = discounts.filter(d => d.stock > 0);
 
     if (tab === 'All') {
-      // Tampilkan SEMUA (yang stoknya ada)
+
       setFilteredDiscounts(availableDiscounts);
     } else {
-      // Tampilkan HANYA tipe yang sesuai tab & stoknya ada
+
       setFilteredDiscounts(availableDiscounts.filter(d => d.type === tab));
     }
   };
@@ -94,14 +94,12 @@ const Discount = () => {
   const handleClaim = async (discount) => {
     if (!user) { message.error("Silahkan login untuk klaim!"); return navigate('/login'); }
 
-    // 1. Cek Stok Habis (Backup validation, although card is hidden)
     if (discount.stock <= 0) {
       message.error("Maaf, stok diskon ini sudah habis!");
-      fetchDiscounts(); // Refresh agar card menghilang
+      fetchDiscounts();
       return;
     }
 
-    // 2. Cek Apakah Sudah Pernah Klaim
     const isAlreadyClaimed = claimedList.some(item => item.discountId === discount.id);
     if (isAlreadyClaimed) {
       message.warning("Anda sudah mengklaim diskon ini sebelumnya!");
@@ -109,19 +107,17 @@ const Discount = () => {
     }
 
     try {
-      // 3. Kurangi Stok di Database
+
       await axios.patch(`http://localhost:3001/discounts/${discount.id}`, {
         stock: discount.stock - 1
       });
 
-      // 4. Simpan Data Klaim ke `claimedDiscounts`
       await axios.post('http://localhost:3001/claimedDiscounts', {
         userId: user.id,
         discountId: discount.id,
         claimedAt: new Date().toLocaleString()
       });
 
-      // 5. Kirim Notifikasi Sukses
       const newNotif = {
         message: `Berhasil Klaim: ${discount.name} (${discount.percentage}%). Gunakan Sebelum ${discount.validUntil}`,
         date: new Date().toLocaleString(),
@@ -132,7 +128,6 @@ const Discount = () => {
 
       message.success("Diskon Berhasil Diklaim!");
       
-      // 6. Refresh Data (Card akan otomatis hilang jika stok jadi 0 karena fetchDiscounts dipanggil)
       fetchDiscounts();
       fetchNotifications();
       fetchClaimedDiscounts();
@@ -222,7 +217,7 @@ const Discount = () => {
         {/* LIST KARTU DISKON */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '30px' }}>
           {filteredDiscounts.map(item => {
-            const isClaimed = claimedList.some(c => c.discountId === item.id); // Cek status klaim
+            const isClaimed = claimedList.some(c => c.discountId === item.id);
             
             return (
               <div 
@@ -243,8 +238,6 @@ const Discount = () => {
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ background: 'var(--oren)', color: 'white', padding: '2px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: 800, fontFamily: 'Narnoor' }}>N.ly</span>
-                  
-                  {/* LABEL HANYA MUNCUL JIKA TIPE BUKAN GENERAL */}
                   {item.type !== 'General' && (
                     <span style={{ background: 'var(--merah)', color: 'white', padding: '2px 12px', borderRadius: '12px', fontSize: '10px', fontWeight: 700, fontFamily: 'Narnoor' }}>{item.type}</span>
                   )}
@@ -265,7 +258,7 @@ const Discount = () => {
                 <div style={{ marginTop: 'auto', opacity: hoveredId === item.id ? 1 : 0, transition: '0.3s', paddingTop: '15px' }}>
                   <Button 
                     block 
-                    disabled={isClaimed} // Disabled jika sudah klaim
+                    disabled={isClaimed} 
                     style={{ 
                       background: isClaimed ? '#ccc' : 'var(--oren)', 
                       color: 'white', 

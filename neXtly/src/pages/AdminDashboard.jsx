@@ -27,7 +27,7 @@ const AdminDashboard = () => {
     fetchTransactions();
     fetchNotifications();
 
-    // TAMBAHAN: Polling interval agar Admin juga mendapat update notifikasi real-time
+    
     const interval = setInterval(async () => {
       const resNotif = await axios.get('http://localhost:3001/notifications');
       if (resNotif.data.length > notifications.length) {
@@ -228,7 +228,7 @@ const AdminDashboard = () => {
             </Card>
           )}
 
-          {/* RENDER KELOLA DISKON DENGAN PROP CALLBACK UNTUK REFRESH NOTIF */}
+
           {currentMenu === '3' && <KelolaDiskon onSuccess={fetchNotifications} />} 
         </Content>
 

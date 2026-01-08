@@ -28,7 +28,7 @@ const Checkout = () => {
   const [selectedDiscount, setSelectedDiscount] = useState(null);
   
   // Data State
-  const [myDiscounts, setMyDiscounts] = useState([]); // Diskon yang valid dan BELUM DIPAKAI
+  const [myDiscounts, setMyDiscounts] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0); 
   
@@ -41,32 +41,22 @@ const Checkout = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // 1. Get Package Detail
+        
         const resPkg = await axios.get('http://localhost:3001/packages');
         const foundPkg = resPkg.data.find(p => p.id.toString() === id.toString());
         setPkg(foundPkg);
 
-        // 2. LOGIKA DISKON YANG BELUM DIPAKAI
         const resClaim = await axios.get(`http://localhost:3001/claimedDiscounts?userId=${user.id}`);
         const resDisc = await axios.get('http://localhost:3001/discounts');
-        const resTrans = await axios.get('http://localhost:3001/transactions'); // Ambil data transaksi utk cek penggunaan
+        const resTrans = await axios.get('http://localhost:3001/transactions'); 
 
-        // Filter diskon yang SUDAH diklaim user
         const claimedDetails = resClaim.data.map(claim => {
           const detail = resDisc.data.find(d => d.id === claim.discountId);
           return detail ? { ...detail, claimId: claim.id } : null;
         }).filter(item => item !== null);
 
-        // Filter diskon yang BELUM pernah dipakai di transaksi manapun oleh user ini
-        // Asumsi: 'usedDiscountId' disimpan di transaksi saat checkout (perlu ditambah di logic post transaction nanti)
-        // Atau: Kita cek manual based on logic sederhana (diskon sekali pakai per user per jenis diskon)
-        // Disini kita gunakan logika: Cek apakah ID diskon (discountId) sudah ada di history transaksi user.
-        
-        // Catatan: Karena struktur db.json sebelumnya belum menyimpan 'discountId' di tabel 'transactions',
-        // kita akan menambahkan field 'discountId' saat POST transaksi di bawah agar pengecekan ini valid kedepannya.
-        
         const usedDiscountIds = resTrans.data
-          .filter(t => t.userId === user.id && t.discountId) // Filter transaksi user yg pakai diskon
+          .filter(t => t.userId === user.id && t.discountId) 
           .map(t => t.discountId);
 
         const availableDiscounts = claimedDetails.filter(d => !usedDiscountIds.includes(d.id));
@@ -150,8 +140,7 @@ const Checkout = () => {
     setModalLoading(true);
 
     try {
-      // 1. Simpan Transaksi ke DB (Status Awal: Pending)
-      // PENTING: Simpan 'discountId' agar bisa dilacak pemakaiannya
+
       const transactionData = {
         packageId: pkg.id,
         userId: user.id,
@@ -169,7 +158,6 @@ const Checkout = () => {
       const resTrans = await axios.post('http://localhost:3001/transactions', transactionData);
       const transactionId = resTrans.data.id; 
 
-      // 2. Kirim Notifikasi "Menunggu Pembayaran"
       const pendingNotif = {
         message: `Pesanan Dibuat: ${pkg.name}. Menunggu pembayaran...`,
         date: new Date().toLocaleString(),
@@ -180,7 +168,6 @@ const Checkout = () => {
 
       message.loading({ content: "Memproses pembayaran... Mohon lakukan pembayaran dalam 30 detik.", key: 'paymentProcess', duration: 0 });
 
-      // 3. JEDA 30 DETIK (Simulasi Pembayaran Berhasil)
       setTimeout(async () => {
         try {
           await axios.patch(`http://localhost:3001/transactions/${transactionId}`, {

@@ -66,14 +66,13 @@ const LandingPage = () => {
           <div className="nav-item" onClick={() => navigate('/Login')}>Buy Now</div>
         </div>
 
-        {/* Button Login yang diperbaiki */}
         <Button 
           className="btn-login-header"
           onClick={() => navigate('/login')}
           style={{ 
             position: 'absolute', 
             right: '60px',
-            /* Inline style dihapus agar fokus ke Class CSS */
+
           }}
         >
           Login
@@ -87,17 +86,16 @@ const LandingPage = () => {
         alignItems: 'center', 
         justifyContent: 'center', 
         padding: '0 10vw',
-        gap: '10vw' /* Jarak antar elemen diperlebar agar tidak menumpuk */
+        gap: '10vw'
       }}>
-        {/* Card Section: Dikecilkan ukurannya */}
+
         <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
           <img 
             src={cardSrc} 
             alt="Product Card" 
             style={{ 
-              maxHeight: '40vh', /* Mengecil dari 48vh ke 40vh */
+              maxHeight: '40vh', 
               width: 'auto',
-              /* Transisi lebih lambat dan halus */
               transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)', 
               transform: isHovered ? 'rotate(-8deg) scale(1.1) translateY(-15px)' : 'rotate(0deg)',
               cursor: 'pointer',
@@ -112,14 +110,13 @@ const LandingPage = () => {
           />
         </div>
 
-        {/* Text Area: Dikecilkan ukurannya */}
         <div style={{ flex: 1.2, display: 'flex', justifyContent: 'flex-start' }}>
           <img 
             src={mainText} 
             alt="Stay Connected" 
             style={{ 
               maxWidth: '100%', 
-              maxHeight: '45vh', /* Mengecil dari 55vh ke 45vh */
+              maxHeight: '45vh',
               objectFit: 'contain' 
             }} 
           />

@@ -9,7 +9,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import PackageDetail from './pages/PackageDetail';
 import Discount from './pages/Discount';
 import History from './pages/History';
-import Checkout from './pages/Checkout'; // Import Checkout
+import Checkout from './pages/Checkout';
 
 const ProtectedRoute = ({ children }) => {
   const user = JSON.parse(localStorage.getItem('rememberedUser'));
@@ -35,7 +35,7 @@ function App() {
         
         {/* Route Detail & Checkout */}
         <Route path="/package/:id" element={<PackageDetail />} /> 
-        <Route path="/checkout/:id" element={<Checkout />} /> {/* Rute Diperbarui */}
+        <Route path="/checkout/:id" element={<Checkout />} />
         
         <Route 
           path="/admin-dashboard" 
