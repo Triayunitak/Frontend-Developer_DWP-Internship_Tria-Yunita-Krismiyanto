@@ -15,30 +15,26 @@ Detail progress:
 - Notes       : Understanding requirements, defining user flow, feature scope, and UX goals.
 
 ### 2. UI Exploration & Component Planning
-- Timeline    :  2026-01-07 15:53 WIB – 2026-01-08 23:49 WIB
-- Duration    :
+- Timeline    : 2026-01-07 15:53 WIB – 2026-01-08 23:49 WIB
+- Duration    : 1 day, 7 hours, 56 minutes
 - Notes       : Designing UI structure, defining reusable components, layout hierarchy, and navigation flow.
 
 ### 3. Frontend Development (React & Hooks)
 - Timeline    : 2026-01-08 07:49 WIB – 2026-01-08 08:16 WIB
 - Duration    : 27 minutes
 - GIT Push    : 12.54 WIB
-- Notes       : Set-up repo + foundation.
+- Notes       : Set-up repo + foundation, Connecting API.
 
-### 4. Frontend Development (React & Hooks)
-- Timeline    : 2026-01-08 07:49 WIB – 2026-01-08 08:35 WIB
-- Duration    :
-- Notes       : Implementing pages, components, CRUD simulation using json-server, and React hooks.
-
-### 5. Integration & State Handling
-- Timeline    : 
-- Duration    :
-- Notes       : Connecting API, handling state, form validation, and error handling.
+### 4. Frontend Development (React & Hooks), Integration & State Handling
+- Timeline    : 2026-01-08 07:49 WIB – 2026-01-08 ? WIB
+- Duration    : 
+- Notes       : Implementing pages, components, CRUD simulation using json-server, form validation,
+                and error handling, bug fixing and React hooks.
 
 ### 6. Testing & Refinement
-- Timeline    : 
+- Timeline    : 2026-01-08 07:49 WIB – 2026-01-08 ? WIB
 - Duration    :
-- Notes       : UI polish, bug fixing, UX flow checking, and final adjustments.
+- Notes       : UI polish, UX flow checking, and final adjustments.
 
 The development was completed in one focused session.
 
@@ -50,3 +46,4 @@ global json : npm install -g json-server
 
 2 term : front = npm run dev http://localhost:5173 
          back = npm run backend http://localhost:3001
+install chart :npm install recharts

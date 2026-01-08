@@ -37,7 +37,9 @@
       "duration": 14,
       "price": 15000,
       "type": "Best Deal",
-      "category": "weekly"
+      "category": "weekly",
+      "description": "Nikmati kuota melimpah untuk penggunaan media sosial seminggu penuh.",
+      "features": ["7 GB Main Quota", "14 Days Active", "Bonus Youtube Apps"]
     },
     {
       "id": "2",
@@ -46,7 +48,9 @@
       "duration": 7,
       "price": 25000,
       "type": "Student",
-      "category": "daily"
+      "category": "daily",
+      "description": "Khusus pelajar! Akses Zoom, Meet, dan Classroom tanpa kuota utama.",
+      "features": ["14 GB Main Quota", "7 Days Active", "Akses Zoom & Meet Sepuasnya"]
     },
     {
       "id": "3",
@@ -55,8 +59,19 @@
       "duration": 28,
       "price": 100000,
       "type": "Professional",
-      "category": "monthly"
+      "category": "monthly",
+      "description": "Paket besar untuk produktivitas kerja tanpa batas di semua jaringan.",
+      "features": ["80 GB Main Quota", "28 Days Active", "High Speed Priority", "No FUP"]
     }
+  ],
+  "transactions": [
+    { "id": 1, "packageId": "1", "type": "Best Deal", "month": "January", "amount": 15000 },
+    { "id": 2, "packageId": "2", "type": "Student", "month": "January", "amount": 25000 },
+    { "id": 3, "packageId": "1", "type": "Best Deal", "month": "February", "amount": 15000 }
+  ],
+  "vouchers": [
+    { "id": "v1", "code": "HEMAT50", "discount": 5000, "minPurchase": 20000 },
+    { "id": "v2", "code": "MABA", "discount": 10000, "minPurchase": 50000 }
   ],
   "notifications": []
 }

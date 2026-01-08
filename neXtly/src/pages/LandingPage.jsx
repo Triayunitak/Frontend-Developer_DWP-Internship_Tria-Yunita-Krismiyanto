@@ -32,15 +32,17 @@ const LandingPage = () => {
       backgroundColor: '#1E1E1E'
     }}>
       
-      {/* HEADER: Memberikan jarak vertikal yang cukup */}
+      
       <header style={{ 
         height: '20vh', 
         display: 'flex', 
         justifyContent: 'center', 
         alignItems: 'center',
         position: 'relative',
+        padding: '0 5%',
         zIndex: 100
       }}>
+        {/* Menu Capsule */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -64,10 +66,15 @@ const LandingPage = () => {
           <div className="nav-item" onClick={() => navigate('/Login')}>Buy Now</div>
         </div>
 
+        {/* Button Login yang diperbaiki */}
         <Button 
           className="btn-login-header"
           onClick={() => navigate('/login')}
-          style={{ position: 'absolute', right: '60px' }}
+          style={{ 
+            position: 'absolute', 
+            right: '60px',
+            /* Inline style dihapus agar fokus ke Class CSS */
+          }}
         >
           Login
         </Button>

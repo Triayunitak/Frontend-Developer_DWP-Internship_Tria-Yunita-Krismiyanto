@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Narnoor:wght@400;500;600;700;800&display=swap');
 
 :root {
@@ -9,88 +8,51 @@
   --kuning: #FFBF00;
 }
 
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Narnoor', serif;
 }
 
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Tetap terkunci untuk Landing Page */
-  font-family: 'Narnoor', serif;
+  overflow: hidden;
   background-color: var(--hitam);
   -webkit-font-smoothing: antialiased;
 }
 
-/* LANDING PAGE NAV */
-.nav-item {
-  color: var(--putih) !important;
-  font-weight: 800;
-  font-size: 0.9rem;
-  padding: 0 20px;
-  height: 40px;
-  border-radius: 20px;
-  display: inline-flex;
-  border : none !important;
-  align-items: center;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: pointer;
+.scroll-container {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #f9f9f9;
+  scroll-behavior: smooth;
 }
 
-.nav-item:hover {
-  background: var(--oren) !important;
-  color: var(--putih) !important;
-  box-shadow: 0 4px 15px rgba(255, 119, 0, 0.4);
-}
+.scroll-container::-webkit-scrollbar { width: 6px; }
+.scroll-container::-webkit-scrollbar-thumb { background: var(--oren); border-radius: 10px; }
 
-/* DASHBOARD NAV */
+/* NAVIGATION ITEMS */
 .nav-item-dash {
   color: var(--putih);
   padding: 6px 14px;
   border-radius: 20px;
-  border : none !important;
   cursor: pointer;
   font-weight: 700;
   font-size: 0.75rem;
   transition: 0.3s ease;
 }
+.nav-item-dash:hover, .nav-item-dash.active { background: var(--oren) !important; color: var(--putih) !important; }
 
-.nav-item-dash:hover, .nav-item-dash.active {
-  background: var(--oren) !important;
-  color: var(--putih) !important;
-}
-
-/* PREMIUM CARD HOVER */
-.pkg-card {
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid transparent;
-}
-
-.pkg-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(255, 119, 0, 0.3) !important;
-  border-color: var(--oren) !important;
-}
-
-/* SCROLLBAR CUSTOM */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--oren);
-  border-radius: 10px;
-}
-/* Styling Ikon Global di Dashboard */
+/* GLOBAL ICON NAV HOVER */
 .icon-nav-custom {
-  font-size: 1.5rem !important; /* Memperbesar ukuran ikon */
-  color: var(--hitam); /* Warna ikon default */
+  font-size: 1.5rem !important;
+  color: var(--hitam);
   transition: all 0.3s ease;
 }
 
-/* Container Button Ikon */
 .btn-icon-nav {
   width: 50px !important;
   height: 50px !important;
@@ -100,43 +62,42 @@ html, body {
   background-color: var(--putih) !important;
   border: none !important;
   transition: all 0.3s ease !important;
+  cursor: pointer;
 }
+.btn-icon-nav:hover { transform: scale(1.1); box-shadow: 0 0 15px rgba(255, 119, 0, 0.5); }
+.btn-icon-nav:hover .icon-nav-custom { color: var(--oren) !important; }
 
-.btn-icon-nav:hover {
-  background-color: var(--putih) !important;
-  transform: scale(1.1);
-  box-shadow: 0 0 15px rgba(255, 119, 0, 0.5);
-}
-
-.btn-icon-nav:hover .icon-nav-custom {
-  color: var(--oren) !important;
-}
-
-/* Efek Hover Khusus Tombol Filter */
-.btn-filter-custom {
+/* FILTER & BACK BUTTON HOVER */
+.btn-filter-custom, .btn-back-detail {
   border-radius: 25px !important;
   height: 40px !important;
   padding: 0 25px !important;
   border: 1px solid #ddd !important;
-  font-weight: 600 !important;
-  font-family: 'Narnoor', serif !important;
+  font-weight: 800 !important;
   transition: all 0.3s ease !important;
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
   background: var(--putih) !important;
+  cursor: pointer;
+  color: var(--hitam) !important;
 }
 
-.btn-filter-custom:hover {
+.btn-filter-custom:hover, .btn-back-detail:hover {
   color: var(--oren) !important;
   border-color: var(--oren) !important;
   box-shadow: 0 4px 10px rgba(255, 119, 0, 0.2);
 }
 
-.btn-filter-custom:hover .icon-filter {
+.btn-filter-custom:hover .icon-filter, .btn-back-detail:hover .icon-back {
   color: var(--oren) !important;
 }
 
-.icon-filter {
-  transition: color 0.3s ease;
+.icon-filter, .icon-back { transition: color 0.3s ease; }
+
+/* PREMIUM CARD */
+.pkg-card {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid transparent;
 }
+.pkg-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 30px rgba(255, 119, 0, 0.3) !important; border-color: var(--oren) !important; }
