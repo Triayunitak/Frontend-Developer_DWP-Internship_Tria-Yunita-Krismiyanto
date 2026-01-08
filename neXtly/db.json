@@ -1,5 +1,62 @@
 {
-  "users": [],
-  "packages": [],
-  "transactions": []
+  "users": [
+    {
+      "id": "1",
+      "username": "AdminNextly",
+      "email": "admin@nextly.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "Nityunita07",
+      "email": "triya@gmail.com",
+      "password": "password123",
+      "role": "customer"
+    },
+    {
+      "id": "2527",
+      "username": "nitnot",
+      "email": "tria@gmail.com",
+      "password": "pwpwpw",
+      "role": "customer"
+    },
+    {
+      "id": "b6bc",
+      "username": "nitnot",
+      "email": "tria@gmail.com",
+      "password": "pwpwpw",
+      "role": "customer"
+    }
+  ],
+  "packages": [
+    {
+      "id": "1",
+      "name": "Super Kaget",
+      "quota": 7,
+      "duration": 14,
+      "price": 15000,
+      "type": "Best Deal",
+      "category": "weekly"
+    },
+    {
+      "id": "2",
+      "name": "Special Student",
+      "quota": 14,
+      "duration": 7,
+      "price": 25000,
+      "type": "Student",
+      "category": "daily"
+    },
+    {
+      "id": "3",
+      "name": "Super Professional",
+      "quota": 80,
+      "duration": 28,
+      "price": 100000,
+      "type": "Professional",
+      "category": "monthly"
+    }
+  ],
+  "notifications": []
 }

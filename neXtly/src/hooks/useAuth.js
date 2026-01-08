@@ -8,9 +8,7 @@ export const useAuth = () => {
 
   const login = (userData, remember) => {
     setUser(userData);
-    if (remember) {
-      localStorage.setItem('rememberedUser', JSON.stringify(userData));
-    }
+    localStorage.setItem('rememberedUser', JSON.stringify(userData));
   };
 
   const logout = () => {

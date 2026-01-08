@@ -1,4 +1,4 @@
-/* Import Font Narnoor */
+
 @import url('https://fonts.googleapis.com/css2?family=Narnoor:wght@400;500;600;700;800&display=swap');
 
 :root {
@@ -9,7 +9,7 @@
   --kuning: #FFBF00;
 }
 
-/* Reset Standar & Anti-Scroll */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -19,39 +19,25 @@
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: hidden; /* Tetap terkunci untuk Landing Page */
   font-family: 'Narnoor', serif;
   background-color: var(--hitam);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Global Transition untuk kehalusan interaksi */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-
+/* LANDING PAGE NAV */
 .nav-item {
   color: var(--putih) !important;
   font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
-  padding: 0 25px;
-  height: 45px !important;
-  border-radius: 25px;
-  cursor: pointer;
-  
-  
+  font-size: 0.9rem;
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 20px;
   display: inline-flex;
+  border : none !important;
   align-items: center;
-  justify-content: center;
-  line-height: 1 !important;
-  text-align: center;
-  background: transparent;
-  border: none;
-  
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
 }
 
 .nav-item:hover {
@@ -60,38 +46,97 @@ html, body {
   box-shadow: 0 4px 15px rgba(255, 119, 0, 0.4);
 }
 
-/* Button Login di Header */
-.btn-login-header {
-  background: var(--putih) !important;
-  color: var(--hitam) !important;
-  font-weight: 800;
-  border-radius: 25px;
-  border: none !important;
-  height: 45px !important;
-  padding: 0 30px !important;
-  
-  /* Centering Logic */
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  line-height: 1 !important;
-  
+/* DASHBOARD NAV */
+.nav-item-dash {
+  color: var(--putih);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border : none !important;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.75rem;
+  transition: 0.3s ease;
+}
+
+.nav-item-dash:hover, .nav-item-dash.active {
+  background: var(--oren) !important;
+  color: var(--putih) !important;
+}
+
+/* PREMIUM CARD HOVER */
+.pkg-card {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid transparent;
+}
+
+.pkg-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(255, 119, 0, 0.3) !important;
+  border-color: var(--oren) !important;
+}
+
+/* SCROLLBAR CUSTOM */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--oren);
+  border-radius: 10px;
+}
+/* Styling Ikon Global di Dashboard */
+.icon-nav-custom {
+  font-size: 1.5rem !important; /* Memperbesar ukuran ikon */
+  color: var(--hitam); /* Warna ikon default */
   transition: all 0.3s ease;
 }
 
-.btn-login-header:hover {
-  background: var(--oren) !important;
-  color: var(--putih) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 119, 0, 0.3);
+/* Container Button Ikon */
+.btn-icon-nav {
+  width: 50px !important;
+  height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: var(--putih) !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
 }
 
-.card-animation {
-  transition: all 5s cubic-bezier(0.68, -0.6, 0.32, 1.6) !important;
-  will-change: transform, width;
+.btn-icon-nav:hover {
+  background-color: var(--putih) !important;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 119, 0, 0.5);
 }
 
-img, .nav-item {
-  user-select: none;
-  -webkit-user-drag: none;
+.btn-icon-nav:hover .icon-nav-custom {
+  color: var(--oren) !important;
+}
+
+/* Efek Hover Khusus Tombol Filter */
+.btn-filter-custom {
+  border-radius: 25px !important;
+  height: 40px !important;
+  padding: 0 25px !important;
+  border: 1px solid #ddd !important;
+  font-weight: 600 !important;
+  font-family: 'Narnoor', serif !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: var(--putih) !important;
+}
+
+.btn-filter-custom:hover {
+  color: var(--oren) !important;
+  border-color: var(--oren) !important;
+  box-shadow: 0 4px 10px rgba(255, 119, 0, 0.2);
+}
+
+.btn-filter-custom:hover .icon-filter {
+  color: var(--oren) !important;
+}
+
+.icon-filter {
+  transition: color 0.3s ease;
 }
